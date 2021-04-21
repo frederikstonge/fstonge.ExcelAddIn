@@ -19,27 +19,27 @@ namespace Sobeys.ExcelAddIn
             _workbooks = new Dictionary<string, WorkbookWrapper>();
         }
 
-        private void Application_WorkbookActivate(Excel.Workbook Wb)
+        private void Application_WorkbookActivate(Excel.Workbook workbook)
         {
-            if (!_workbooks.ContainsKey(Wb.FullName))
+            if (!_workbooks.ContainsKey(workbook.FullName))
             {
-                _workbooks.Add(Wb.FullName, new WorkbookWrapper(Wb, _ribbon));
+                _workbooks.Add(workbook.FullName, new WorkbookWrapper(workbook, _ribbon));
             }
         }
 
-        private void Application_WorkbookBeforeClose(Excel.Workbook Wb, ref bool Cancel)
+        private void Application_WorkbookBeforeClose(Excel.Workbook workbook, ref bool cancel)
         {
-            if (!Cancel)
+            if (!cancel)
             {
-                var wrapper = _workbooks[Wb.FullName];
-                _workbooks.Remove(Wb.FullName);
+                var wrapper = _workbooks[workbook.FullName];
+                _workbooks.Remove(workbook.FullName);
                 wrapper.Dispose();
             }
         }
 
-        private void Application_WorkbookOpen(Excel.Workbook Wb)
+        private void Application_WorkbookOpen(Excel.Workbook workbook)
         {
-            _workbooks.Add(Wb.FullName, new WorkbookWrapper(Wb, _ribbon));
+            _workbooks.Add(workbook.FullName, new WorkbookWrapper(workbook, _ribbon));
         }
 
         private WorkbookWrapper GetActiveWorkbookWrapper()
