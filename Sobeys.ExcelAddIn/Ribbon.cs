@@ -33,7 +33,7 @@ namespace Sobeys.ExcelAddIn
             {
                 var wrapper = _workbooks[Wb.FullName];
                 _workbooks.Remove(Wb.FullName);
-                                wrapper.Dispose();
+                wrapper.Dispose();
             }
         }
 

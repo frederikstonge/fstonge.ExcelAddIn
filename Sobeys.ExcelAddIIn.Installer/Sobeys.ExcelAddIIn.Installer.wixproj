@@ -6,7 +6,7 @@
     <ProductVersion>3.10</ProductVersion>
     <ProjectGuid>94997367-41eb-406a-83d7-78c4470da74d</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>Sobeys.ExcelAddin.Installer</OutputName>
+    <OutputName>Sobeys.ExcelAddIn.Installer</OutputName>
     <OutputType>Package</OutputType>
     <Name>Sobeys.ExcelAddIn.Installer</Name>
   </PropertyGroup>
@@ -14,7 +14,7 @@
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <DefineConstants>Debug;AddInFiles=..\Sobeys.ExcelAddIn\bin\$(Configuration)\</DefineConstants>
-    <SuppressIces>ICE91</SuppressIces>
+    <SuppressIces>ICE91;ICE61</SuppressIces>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
