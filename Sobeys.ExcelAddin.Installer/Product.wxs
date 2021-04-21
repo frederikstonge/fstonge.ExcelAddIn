@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Product Id="*" Name="Sobeys.ExcelAddin.Installer" Language="1033" Version="1.0.0.0" Manufacturer="Fred" UpgradeCode="6abd0447-f7d4-4e3a-9ddc-4e074085a547">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perUser" />
-		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MajorUpgrade Schedule="afterInstallInitialize" AllowDowngrades="yes" />
 		<MediaTemplate EmbedCab="yes" />
 
 		<Feature Id="ProductFeature" Title="Sobeys.ExcelAddin.Installer" Level="1">
