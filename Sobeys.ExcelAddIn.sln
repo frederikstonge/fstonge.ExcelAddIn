@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sobeys.ExcelAddIn", "Sobeys.ExcelAddIn\Sobeys.ExcelAddIn.csproj", "{6144141F-2DA2-4DE7-AA3C-11A4CD6D9EE9}"
 EndProject
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Sobeys.ExcelAddin.Installer", "Sobeys.ExcelAddin.Installer\Sobeys.ExcelAddin.Installer.wixproj", "{94997367-41EB-406A-83D7-78C4470DA74D}"
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Sobeys.ExcelAddIn.Installer", "Sobeys.ExcelAddIn.Installer\Sobeys.ExcelAddIn.Installer.wixproj", "{94997367-41EB-406A-83D7-78C4470DA74D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

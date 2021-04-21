@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="Sobeys.ExcelAddin.Installer" Language="1033" Version="1.0.0.0" Manufacturer="Fred" UpgradeCode="6abd0447-f7d4-4e3a-9ddc-4e074085a547">
+	<Product Id="*" Name="Sobeys.ExcelAddIn.Installer" Language="1033" Version="1.0.0.0" Manufacturer="Fred" UpgradeCode="6abd0447-f7d4-4e3a-9ddc-4e074085a547">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perUser" />
 		<MajorUpgrade Schedule="afterInstallInitialize" AllowDowngrades="yes" />
 		<MediaTemplate EmbedCab="yes" />
 
-		<Feature Id="ProductFeature" Title="Sobeys.ExcelAddin.Installer" Level="1">
+		<Feature Id="ProductFeature" Title="Sobeys.ExcelAddIn.Installer" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
 			<ComponentRef Id="Registry_FriendlyName" />
 			<ComponentRef Id="Registry_Description" />
@@ -17,7 +17,7 @@
 	<Fragment>
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="AppDataFolder">
-				<Directory Id="INSTALLFOLDER" Name="SobeysExcelAddin" />
+				<Directory Id="INSTALLFOLDER" Name="SobeysExcelAddIn" />
 				<Component Id="Registry_FriendlyName">
 					<RegistryValue Id="RegKey_FriendlyName" Root="HKCU"
 								   Key="Software\Microsoft\Office\Excel\AddIns\Sobeys.ExcelAddIn"
@@ -55,14 +55,14 @@
 					<RegistryValue Name="VstoFlag" Value="1" Type="string" KeyPath="yes" />
 				</RegistryKey>
 				<File Id="Sobeys_ExcelAddIn_vsto"
-					  Name="Sobeys.ExcelAddIn.vsto" Source="$(var.AddinFiles)"></File>
+					  Name="Sobeys.ExcelAddIn.vsto" Source="$(var.AddInFiles)"></File>
 			</Component>
 			<Component Id="Sobeys_ExcelAddIn_dll_manifest_Component" Guid="BE45DABC-B4C4-4147-8149-9498093957B3">
 				<RegistryKey Root="HKCU" Key="Software\SobeysAddIn\TestApp">
 					<RegistryValue Name="ManifestFlag" Value="1" Type="string" KeyPath="yes" />
 				</RegistryKey>
 				<File Id="Sobeys_ExcelAddIn_dll_manifest"
-					  Name="Sobeys.ExcelAddIn.dll.manifest" Source="$(var.AddinFiles)"></File>
+					  Name="Sobeys.ExcelAddIn.dll.manifest" Source="$(var.AddInFiles)"></File>
 			</Component>
 			<Component Id="MSOfficeToolsCommon_dll_Component" Guid="4CE92372-27CF-4DFB-B7CA-B083529525E2">
 				<RegistryKey Root="HKCU" Key="Software\SobeysAddIn\TestApp">
@@ -70,19 +70,14 @@
 				</RegistryKey>
 				<File Id="MSOfficeToolsCommon_dll"
 					  Name="Microsoft.Office.Tools.Common.v4.0.Utilities.dll"
-					  Source="$(var.AddinFiles)"></File>
+					  Source="$(var.AddInFiles)"></File>
 			</Component>
-			<!--<Component Id="MSOfficeToolsExcel_dll_Component">
-				<File Id="MSOfficeToolsExcel_dll" KeyPath="yes"
-					  Name="Microsoft.Office.Tools.Excel.dll"
-					  Source="$(var.AddinFiles)"></File>
-			</Component>-->
 			<Component Id="Sobeys_ExcelAddIn_dll_Component" Guid="F9771D12-982B-4F08-BA77-A946728C13D5">
 				<RegistryKey Root="HKCU" Key="Software\SobeysAddIn\TestApp">
 					<RegistryValue Name="LibFlag" Value="1" Type="string" KeyPath="yes" />
 				</RegistryKey>
 				<File Id="Sobeys_ExcelAddIn_dll"
-					  Name="Sobeys.ExcelAddIn.dll" Source="$(var.AddinFiles)" />
+					  Name="Sobeys.ExcelAddIn.dll" Source="$(var.AddInFiles)" />
 				<RemoveFolder Id="RemoveINSTALLFOLDER" Directory="INSTALLFOLDER" On="uninstall" />
 			</Component>
 		</ComponentGroup>
