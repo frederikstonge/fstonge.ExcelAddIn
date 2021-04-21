@@ -25,6 +25,8 @@ namespace Sobeys.ExcelAddIn
             {
                 _workbooks.Add(workbook.FullName, new WorkbookWrapper(workbook, _ribbon));
             }
+
+            _ribbon.Invalidate();
         }
 
         private void Application_WorkbookBeforeClose(Excel.Workbook workbook, ref bool cancel)
