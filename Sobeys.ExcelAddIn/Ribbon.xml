@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
+  <ribbon>
+    <tabs>
+      <tab id="Sobeys" label="Sobeys">
+        <group id="QuickActionGroup" label="Quick Actions">
+			<button id="SuperCopy" label="Super Copy" screentip="Text" onAction="OnSuperCopy" getEnabled="SuperCopyEnabled" imageMso="Copy" supertip="Copy the selection with ; as separator" />
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>
+
