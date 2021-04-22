@@ -83,7 +83,11 @@ namespace Sobeys.ExcelAddIn
             {
                 activeWorkbook.OnSuperCopy();
             }
+        }
 
+        public void OnAbout(Office.IRibbonControl control)
+        {
+            System.Diagnostics.Process.Start("https://github.com/frederikstonge/sobeys-excel-addin");
         }
 
         public void Ribbon_Load(Office.IRibbonUI ribbonUI)
