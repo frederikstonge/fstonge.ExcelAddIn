@@ -1,8 +1,8 @@
-﻿using Sobeys.ExcelAddIn.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Windows.Forms;
+using Sobeys.ExcelAddIn.Models;
 using Excel = Microsoft.Office.Interop.Excel;
 using Office = Microsoft.Office.Core;
 

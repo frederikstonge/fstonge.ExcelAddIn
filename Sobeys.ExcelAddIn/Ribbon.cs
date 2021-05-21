@@ -4,7 +4,6 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using Office = Microsoft.Office.Core;
 
-
 namespace Sobeys.ExcelAddIn
 {
     [ComVisible(true)]
@@ -65,6 +64,7 @@ namespace Sobeys.ExcelAddIn
                     }
                 }
             }
+
             return null;
         }
     }

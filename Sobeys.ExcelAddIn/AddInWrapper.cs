@@ -1,9 +1,9 @@
-﻿using Sobeys.ExcelAddIn.Models;
-using Sobeys.ExcelAddIn.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
+using Sobeys.ExcelAddIn.Models;
+using Sobeys.ExcelAddIn.Services;
 using Excel = Microsoft.Office.Interop.Excel;
 using Office = Microsoft.Office.Core;
 
@@ -52,8 +52,7 @@ namespace Sobeys.ExcelAddIn
         }
 
         public bool GetWorkbookEnabled(Office.IRibbonControl control)
-        {
-            
+        {        
             var activeWorkbook = GetActiveWorkbookService();
             if (activeWorkbook != null)
             {
@@ -65,7 +64,6 @@ namespace Sobeys.ExcelAddIn
 
         public bool GetEnabled(Office.IRibbonControl control)
         {
-
             switch (control.Id)
             {
                 case RibbonButtons.About:
@@ -96,7 +94,6 @@ namespace Sobeys.ExcelAddIn
 
             return null;
         }
-
 
         private void ApplicationWorkbookActivate(Excel.Workbook workbook)
         {

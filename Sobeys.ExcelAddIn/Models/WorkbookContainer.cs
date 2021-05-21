@@ -1,5 +1,5 @@
-﻿using Sobeys.ExcelAddIn.Services;
-using System.ComponentModel.Composition.Hosting;
+﻿using System.ComponentModel.Composition.Hosting;
+using Sobeys.ExcelAddIn.Services;
 
 namespace Sobeys.ExcelAddIn.Models
 {

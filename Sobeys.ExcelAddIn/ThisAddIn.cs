@@ -1,9 +1,9 @@
-﻿using Microsoft.Office.Core;
-using Octokit;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Forms;
+using Microsoft.Office.Core;
+using Octokit;
 
 namespace Sobeys.ExcelAddIn
 {
@@ -13,8 +13,8 @@ namespace Sobeys.ExcelAddIn
         private const string GithubProject = "sobeys-excel-addin";
 
         private Ribbon _ribbon;
-        public AddInWrapper AddInWrapper { get; private set; }
 
+        public AddInWrapper AddInWrapper { get; private set; }
 
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject()
         {
@@ -46,9 +46,7 @@ namespace Sobeys.ExcelAddIn
             }
             catch
             {
-
             }
-
 
             AddInWrapper = new AddInWrapper(_ribbon);
         }
@@ -60,8 +58,8 @@ namespace Sobeys.ExcelAddIn
 
         private void InternalStartup()
         {
-            this.Startup += new EventHandler(ThisAddIn_Startup);
-            this.Shutdown += new EventHandler(ThisAddIn_Shutdown);
+            Startup += new EventHandler(ThisAddIn_Startup);
+            Shutdown += new EventHandler(ThisAddIn_Shutdown);
         }
     }
 }
