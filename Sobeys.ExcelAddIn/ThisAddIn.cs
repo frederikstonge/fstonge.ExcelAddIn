@@ -1,7 +1,6 @@
 ﻿using Microsoft.Office.Core;
 using Octokit;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Forms;
@@ -13,7 +12,11 @@ namespace Sobeys.ExcelAddIn
         private const string GithubUsername = "frederikstonge";
         private const string GithubProject = "sobeys-excel-addin";
 
-        private void ThisAddIn_Startup(object sender, System.EventArgs e)
+        private Ribbon _ribbon;
+        public AddInWrapper AddInWrapper { get; private set; }
+
+
+        private void ThisAddIn_Startup(object sender, EventArgs e)
         {
             var client = new GitHubClient(new ProductHeaderValue(GithubProject));
             var releases = client.Repository.Release.GetAll(GithubUsername, GithubProject).Result;
@@ -32,23 +35,27 @@ namespace Sobeys.ExcelAddIn
                     Process.Start($"https://github.com/{GithubUsername}/{GithubProject}/releases/tag/{latestRelease.TagName}");
                 }
             }
+
+            AddInWrapper = new AddInWrapper(_ribbon);
         }
 
-        private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
+        private void ThisAddIn_Shutdown(object sender, EventArgs e)
         {
+            AddInWrapper.Dispose();
         }
 
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject()
         {
-            return new Ribbon();
+            _ribbon = new Ribbon(this);
+            return _ribbon;
         }
 
         #region VSTO generated code
 
         private void InternalStartup()
         {
-            this.Startup += new System.EventHandler(ThisAddIn_Startup);
-            this.Shutdown += new System.EventHandler(ThisAddIn_Shutdown);
+            this.Startup += new EventHandler(ThisAddIn_Startup);
+            this.Shutdown += new EventHandler(ThisAddIn_Shutdown);
         }
         
         #endregion

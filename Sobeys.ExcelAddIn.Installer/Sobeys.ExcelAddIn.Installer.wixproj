@@ -19,6 +19,8 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>AddInFiles=..\Sobeys.ExcelAddIn\bin\$(Configuration)\</DefineConstants>
+    <SuppressIces>ICE91;ICE61</SuppressIces>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Product.wxs" />

@@ -4,10 +4,10 @@
     <tabs>
       <tab id="Sobeys" label="Sobeys">
         <group id="QuickActionGroup" label="Quick Actions">
-			<button size="large" id="SuperCopy" label="Super Copy" screentip="Super Copy" onAction="OnSuperCopy" getEnabled="SuperCopyEnabled" imageMso="Copy" supertip="Copy a column and separate values with ;" />
+			<button size="large" id="SuperCopy" label="Super Copy" screentip="Super Copy" onAction="OnWorkbookAction" getEnabled="GetWorkbookEnabled" imageMso="Copy" supertip="Copy a column and separate values with ;" />
         </group>
 		  <group id="AboutGroup" label="About">
-			  <button size="large" id="About" label="About" screentip="About" onAction="OnAbout" imageMso="About" supertip="Launch page for about" />
+			  <button size="large" id="About" label="About" screentip="About" onAction="OnAction" getEnabled="GetEnabled" imageMso="About" supertip="Launch page for about" />
 		  </group>
       </tab>
     </tabs>

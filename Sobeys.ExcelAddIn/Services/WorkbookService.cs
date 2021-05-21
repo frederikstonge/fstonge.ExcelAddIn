@@ -1,36 +1,59 @@
-﻿using System;
+﻿using Sobeys.ExcelAddIn.Models;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 using Office = Microsoft.Office.Core;
 
-namespace Sobeys.ExcelAddIn
+namespace Sobeys.ExcelAddIn.Services
 {
-    public class WorkbookWrapper : IDisposable
+    [Export]
+    public class WorkbookService : IDisposable
     {
         private Excel.Workbook _workbook;
-        private Office.IRibbonUI _ribbon;
+        private Ribbon _ribbon;
 
-        public WorkbookWrapper(Excel.Workbook workbook, Office.IRibbonUI ribbon)
+        [ImportingConstructor]
+        public WorkbookService(Excel.Workbook workbook, Ribbon ribbon)
         {
             _workbook = workbook;
             _ribbon = ribbon;
             _workbook.SheetSelectionChange += _workbook_SheetSelectionChange;
         }
 
-        public string FullName => _workbook.FullName;
+        public void OnAction(Office.IRibbonControl control)
+        {
+            switch (control.Id)
+            {
+                case RibbonButtons.SuperCopy:
+                    SuperCopy();
+                    break;
+            }
+        }
 
-        public bool SuperCopyEnabled()
+        public bool GetEnabled(Office.IRibbonControl control)
+        {
+            switch (control.Id)
+            {
+                case RibbonButtons.SuperCopy:
+                    return SuperCopyEnabled();
+                default:
+                    return true;
+            }
+        }
+
+        private bool SuperCopyEnabled()
         {
             Excel.Range range = Globals.ThisAddIn.Application.Selection;
             return range.Columns.Count == 1 && range.Rows.Count > 1;
         }
 
-        public void OnSuperCopy()
+        private void SuperCopy()
         {
             try
             {
-                Excel.Range range = Globals.ThisAddIn.Application.Selection;
+                Excel.Range range = _workbook.Application.Selection;
                 var items = new List<string>();
                 foreach (Excel.Range row in range.Rows)
                 {

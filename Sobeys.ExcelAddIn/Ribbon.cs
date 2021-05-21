@@ -4,7 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using Office = Microsoft.Office.Core;
-using Excel = Microsoft.Office.Interop.Excel;
+
 
 namespace Sobeys.ExcelAddIn
 {
@@ -12,47 +12,18 @@ namespace Sobeys.ExcelAddIn
     public class Ribbon : Office.IRibbonExtensibility
     {
         private Office.IRibbonUI _ribbon;
-        private Dictionary<string, WorkbookWrapper> _workbooks;
+        private ThisAddIn _addIn;
 
-        public Ribbon()
+        public Ribbon(ThisAddIn addIn)
         {
-            _workbooks = new Dictionary<string, WorkbookWrapper>();
+            _addIn = addIn;
         }
 
-        private void Application_WorkbookActivate(Excel.Workbook workbook)
+        public void Invalidate()
         {
-            if (!_workbooks.ContainsKey(workbook.FullName))
-            {
-                _workbooks.Add(workbook.FullName, new WorkbookWrapper(workbook, _ribbon));
-            }
-
             _ribbon.Invalidate();
         }
 
-        private void Application_WorkbookBeforeClose(Excel.Workbook workbook, ref bool cancel)
-        {
-            if (!cancel)
-            {
-                var wrapper = _workbooks[workbook.FullName];
-                _workbooks.Remove(workbook.FullName);
-                wrapper.Dispose();
-            }
-        }
-
-        private void Application_WorkbookOpen(Excel.Workbook workbook)
-        {
-            _workbooks.Add(workbook.FullName, new WorkbookWrapper(workbook, _ribbon));
-        }
-
-        private WorkbookWrapper GetActiveWorkbookWrapper()
-        {
-            if (Globals.ThisAddIn.Application.ActiveWorkbook != null)
-            {
-                return _workbooks[Globals.ThisAddIn.Application.ActiveWorkbook.FullName];
-            }
-
-            return null;
-        }
 
         #region IRibbonExtensibility Members
 
@@ -65,37 +36,24 @@ namespace Sobeys.ExcelAddIn
 
         #region Ribbon Callbacks
 
-        public bool SuperCopyEnabled(Office.IRibbonControl control)
+        public bool GetWorkbookEnabled(Office.IRibbonControl control)
         {
-            var activeWorkbook = GetActiveWorkbookWrapper();
-            if (activeWorkbook != null)
-            {
-                return activeWorkbook.SuperCopyEnabled();
-            }
-
-            return false;
+            return _addIn.AddInWrapper.GetWorkbookEnabled(control);
         }
 
-        public void OnSuperCopy(Office.IRibbonControl control)
+        public void OnWorkbookAction(Office.IRibbonControl control)
         {
-            var activeWorkbook = GetActiveWorkbookWrapper();
-            if (activeWorkbook != null)
-            {
-                activeWorkbook.OnSuperCopy();
-            }
+            _addIn.AddInWrapper.OnWorkbookAction(control);
         }
 
-        public void OnAbout(Office.IRibbonControl control)
+        public void OnAction(Office.IRibbonControl control)
         {
-            System.Diagnostics.Process.Start("https://github.com/frederikstonge/sobeys-excel-addin");
+            _addIn.AddInWrapper.OnAction(control);
         }
 
         public void Ribbon_Load(Office.IRibbonUI ribbonUI)
         {
-            this._ribbon = ribbonUI;
-            Globals.ThisAddIn.Application.WorkbookOpen += Application_WorkbookOpen;
-            Globals.ThisAddIn.Application.WorkbookBeforeClose += Application_WorkbookBeforeClose;
-            Globals.ThisAddIn.Application.WorkbookActivate += Application_WorkbookActivate;
+            _ribbon = ribbonUI;
         }
 
         #endregion
