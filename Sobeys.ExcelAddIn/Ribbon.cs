@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.Composition;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -10,12 +11,9 @@ namespace Sobeys.ExcelAddIn
     public class Ribbon : Office.IRibbonExtensibility
     {
         private Office.IRibbonUI _ribbon;
-        private ThisAddIn _addIn;
 
-        public Ribbon(ThisAddIn addIn)
-        {
-            _addIn = addIn;
-        }
+        [Import]
+        public Bootstrapper Bootstrapper { get; set; }
 
         public void Invalidate()
         {
@@ -29,38 +27,42 @@ namespace Sobeys.ExcelAddIn
 
         public bool GetWorkbookEnabled(Office.IRibbonControl control)
         {
-            return _addIn.AddInWrapper.GetWorkbookEnabled(control);
+            return Bootstrapper.ActiveWorkbookService?.GetEnabled(control) ?? false;
+        }
+
+        public bool GetEnabled(Office.IRibbonControl control)
+        {
+            return Bootstrapper.AddInService?.GetEnabled(control) ?? false;
         }
 
         public void OnWorkbookAction(Office.IRibbonControl control)
         {
-            _addIn.AddInWrapper.OnWorkbookAction(control);
+            Bootstrapper.ActiveWorkbookService?.OnAction(control);
         }
 
         public void OnAction(Office.IRibbonControl control)
         {
-            _addIn.AddInWrapper.OnAction(control);
+            Bootstrapper.AddInService?.OnAction(control);
         }
 
-        public void Ribbon_Load(Office.IRibbonUI ribbonUI)
+        public void Ribbon_Load(Office.IRibbonUI ribbonUi)
         {
-            _ribbon = ribbonUI;
+            _ribbon = ribbonUi;
         }
 
         private static string GetResourceText(string resourceName)
         {
-            Assembly asm = Assembly.GetExecutingAssembly();
-            string[] resourceNames = asm.GetManifestResourceNames();
-            for (int i = 0; i < resourceNames.Length; ++i)
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceNames = assembly.GetManifestResourceNames();
+            foreach (var resource in resourceNames)
             {
-                if (string.Compare(resourceName, resourceNames[i], StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Equals(resourceName, resource, StringComparison.OrdinalIgnoreCase))
                 {
-                    using (StreamReader resourceReader = new StreamReader(asm.GetManifestResourceStream(resourceNames[i])))
+                    using var stream = assembly.GetManifestResourceStream(resource);
+                    if (stream != null)
                     {
-                        if (resourceReader != null)
-                        {
-                            return resourceReader.ReadToEnd();
-                        }
+                        using var resourceReader = new StreamReader(stream);
+                        return resourceReader.ReadToEnd();
                     }
                 }
             }

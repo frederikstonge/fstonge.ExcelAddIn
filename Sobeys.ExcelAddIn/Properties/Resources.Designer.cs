@@ -9,6 +9,7 @@
 //------------------------------------------------------------------------------
 
 namespace Sobeys.ExcelAddIn.Properties {
+    using System;
     
     
     /// <summary>
@@ -18,7 +19,7 @@ namespace Sobeys.ExcelAddIn.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -56,6 +57,24 @@ namespace Sobeys.ExcelAddIn.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A newer version of the addin was detected, do you wish to download it?.
+        /// </summary>
+        internal static string NewVersionMessage {
+            get {
+                return ResourceManager.GetString("NewVersionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New version detected.
+        /// </summary>
+        internal static string NewVersionTitle {
+            get {
+                return ResourceManager.GetString("NewVersionTitle", resourceCulture);
             }
         }
     }

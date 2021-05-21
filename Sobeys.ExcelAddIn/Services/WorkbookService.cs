@@ -9,10 +9,11 @@ using Office = Microsoft.Office.Core;
 namespace Sobeys.ExcelAddIn.Services
 {
     [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class WorkbookService : IDisposable
     {
-        private Excel.Workbook _workbook;
-        private Ribbon _ribbon;
+        private readonly Excel.Workbook _workbook;
+        private readonly Ribbon _ribbon;
 
         [ImportingConstructor]
         public WorkbookService(Excel.Workbook workbook, Ribbon ribbon)
@@ -34,13 +35,11 @@ namespace Sobeys.ExcelAddIn.Services
 
         public bool GetEnabled(Office.IRibbonControl control)
         {
-            switch (control.Id)
+            return control.Id switch
             {
-                case RibbonButtons.SuperCopy:
-                    return SuperCopyEnabled();
-                default:
-                    return true;
-            }
+                RibbonButtons.SuperCopy => SuperCopyEnabled(),
+                _ => true
+            };
         }
 
         public void Dispose()
@@ -50,7 +49,7 @@ namespace Sobeys.ExcelAddIn.Services
 
         private bool SuperCopyEnabled()
         {
-            Excel.Range range = Globals.ThisAddIn.Application.Selection;
+            Excel.Range range = _workbook.Application.Selection;
             return range.Columns.Count == 1 && range.Rows.Count > 1;
         }
 
@@ -79,7 +78,7 @@ namespace Sobeys.ExcelAddIn.Services
             }
         }
 
-        private void WorkbookSheetSelectionChange(object shheet, Excel.Range target)
+        private void WorkbookSheetSelectionChange(object sheet, Excel.Range target)
         {
             _ribbon.Invalidate();
         }

@@ -5,73 +5,42 @@ using System.ComponentModel.Composition.Hosting;
 using Sobeys.ExcelAddIn.Models;
 using Sobeys.ExcelAddIn.Services;
 using Excel = Microsoft.Office.Interop.Excel;
-using Office = Microsoft.Office.Core;
 
 namespace Sobeys.ExcelAddIn
 {
-    public class AddInWrapper : IDisposable
+    public class Bootstrapper : IDisposable
     {
-        private Ribbon _ribbon;
-        private CompositionContainer _container;
-        private Dictionary<string, WorkbookContainer> _workbookContainers;
+        private readonly Ribbon _ribbon;
+        private readonly CompositionContainer _container;
+        private readonly Dictionary<string, WorkbookContainer> _workbookContainers;
 
-        public AddInWrapper(Ribbon ribbon)
+        public Bootstrapper(Ribbon ribbon)
         {
             _ribbon = ribbon;
-            _container = new CompositionContainer();
+            var catalog = new AggregateCatalog();
+            catalog.Catalogs.Add(new AssemblyCatalog(typeof(Bootstrapper).Assembly));
+            _container = new CompositionContainer(catalog);
+            _workbookContainers = new Dictionary<string, WorkbookContainer>();
+
             var batch = new CompositionBatch();
             batch.AddExportedValue(_ribbon);
             batch.AddExportedValue(Globals.ThisAddIn);
             batch.AddExportedValue(this);
             _container.Compose(batch);
+            _container.ComposeParts(_ribbon);
 
-            _workbookContainers = new Dictionary<string, WorkbookContainer>();
+            AddInService = _container.GetExportedValue<AddInService>();
 
             Globals.ThisAddIn.Application.WorkbookOpen += ApplicationWorkbookOpen;
             Globals.ThisAddIn.Application.WorkbookBeforeClose += ApplicationWorkbookBeforeClose;
             Globals.ThisAddIn.Application.WorkbookActivate += ApplicationWorkbookActivate;
         }
 
-        public void OnWorkbookAction(Office.IRibbonControl control)
-        {
-            var activeWorkbook = GetActiveWorkbookService();
-            if (activeWorkbook != null)
-            {
-                activeWorkbook.OnAction(control);
-            }
-        }
+        public AddInService AddInService { get; }
 
-        public void OnAction(Office.IRibbonControl control)
-        {
-            switch (control.Id)
-            {
-                case RibbonButtons.About:
-                    System.Diagnostics.Process.Start("https://github.com/frederikstonge/sobeys-excel-addin");
-                    break;
-            }
-        }
-
-        public bool GetWorkbookEnabled(Office.IRibbonControl control)
-        {        
-            var activeWorkbook = GetActiveWorkbookService();
-            if (activeWorkbook != null)
-            {
-                return activeWorkbook.GetEnabled(control);
-            }
-
-            return false;
-        }
-
-        public bool GetEnabled(Office.IRibbonControl control)
-        {
-            switch (control.Id)
-            {
-                case RibbonButtons.About:
-                    return true;
-                default:
-                    return false;
-            }
-        }
+        public WorkbookService ActiveWorkbookService => _workbookContainers.ContainsKey(Globals.ThisAddIn.Application.ActiveWorkbook.FullName)
+            ? _workbookContainers[Globals.ThisAddIn.Application.ActiveWorkbook.FullName].WorkbookService
+            : null;
 
         public void Dispose()
         {
@@ -83,16 +52,8 @@ namespace Sobeys.ExcelAddIn
             {
                 RemoveWorkbook(workbookContainer.Key);
             }
-        }
 
-        private WorkbookService GetActiveWorkbookService()
-        {
-            if (Globals.ThisAddIn.Application.ActiveWorkbook != null)
-            {
-                return _workbookContainers[Globals.ThisAddIn.Application.ActiveWorkbook.FullName].WorkbookService;
-            }
-
-            return null;
+            _container.Dispose();
         }
 
         private void ApplicationWorkbookActivate(Excel.Workbook workbook)
@@ -121,7 +82,7 @@ namespace Sobeys.ExcelAddIn
         private void AddWorkbook(Excel.Workbook workbook)
         {
             var catalog = new AggregateCatalog();
-            catalog.Catalogs.Add(new AssemblyCatalog(typeof(AddInWrapper).Assembly));
+            catalog.Catalogs.Add(_container.Catalog);
             var container = new CompositionContainer(catalog);
             var batch = new CompositionBatch();
             batch.AddExportedValue(_ribbon);

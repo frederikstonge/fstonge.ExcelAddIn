@@ -14,11 +14,11 @@ namespace Sobeys.ExcelAddIn
 
         private Ribbon _ribbon;
 
-        public AddInWrapper AddInWrapper { get; private set; }
+        private Bootstrapper _addInWrapper;
 
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject()
         {
-            _ribbon = new Ribbon(this);
+            _ribbon = new Ribbon();
             return _ribbon;
         }
 
@@ -37,7 +37,11 @@ namespace Sobeys.ExcelAddIn
                 int versionComparison = localVersion.CompareTo(latestGitHubVersion);
                 if (versionComparison < 0)
                 {
-                    var result = MessageBox.Show("A newer version of the addin was detected, do you wish to download it?", "New version detected", MessageBoxButtons.YesNo);
+                    var result = MessageBox.Show(
+                        Properties.Resources.NewVersionMessage,
+                        Properties.Resources.NewVersionTitle,
+                        MessageBoxButtons.YesNo);
+
                     if (result == DialogResult.Yes)
                     {
                         Process.Start($"https://github.com/{GithubUsername}/{GithubProject}/releases/tag/{latestRelease.TagName}");
@@ -46,20 +50,21 @@ namespace Sobeys.ExcelAddIn
             }
             catch
             {
+                // ignored
             }
 
-            AddInWrapper = new AddInWrapper(_ribbon);
+            _addInWrapper = new Bootstrapper(_ribbon);
         }
 
         private void ThisAddIn_Shutdown(object sender, EventArgs e)
         {
-            AddInWrapper.Dispose();
+            _addInWrapper.Dispose();
         }
 
         private void InternalStartup()
         {
-            Startup += new EventHandler(ThisAddIn_Startup);
-            Shutdown += new EventHandler(ThisAddIn_Shutdown);
+            Startup += ThisAddIn_Startup;
+            Shutdown += ThisAddIn_Shutdown;
         }
     }
 }
