@@ -196,6 +196,8 @@
     </Compile>
     <Compile Include="Models\WorkbookContainer.cs" />
     <Compile Include="Services\AddInService.cs" />
+    <Compile Include="Services\IAddInService.cs" />
+    <Compile Include="Services\IWorkbookService.cs" />
     <Compile Include="Services\WorkbookService.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

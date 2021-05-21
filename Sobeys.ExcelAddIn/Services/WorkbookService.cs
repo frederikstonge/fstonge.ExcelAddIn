@@ -8,9 +8,9 @@ using Office = Microsoft.Office.Core;
 
 namespace Sobeys.ExcelAddIn.Services
 {
-    [Export]
+    [Export(typeof(IWorkbookService))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class WorkbookService : IDisposable
+    public class WorkbookService : IWorkbookService, IDisposable
     {
         private readonly Excel.Workbook _workbook;
         private readonly Ribbon _ribbon;

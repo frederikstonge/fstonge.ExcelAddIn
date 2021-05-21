@@ -4,9 +4,9 @@ using Office = Microsoft.Office.Core;
 
 namespace Sobeys.ExcelAddIn.Services
 {
-    [Export]
+    [Export(typeof(IAddInService))]
     [PartCreationPolicy(CreationPolicy.Shared)]
-    public class AddInService
+    public class AddInService : IAddInService
     {
         [ImportingConstructor]
         public AddInService()

@@ -5,7 +5,7 @@ namespace Sobeys.ExcelAddIn.Models
 {
     public class WorkbookContainer
     {
-        public WorkbookContainer(CompositionContainer container, WorkbookService workbookService)
+        public WorkbookContainer(CompositionContainer container, IWorkbookService workbookService)
         {
             Container = container;
             WorkbookService = workbookService;
@@ -13,6 +13,6 @@ namespace Sobeys.ExcelAddIn.Models
 
         public CompositionContainer Container { get; }
 
-        public WorkbookService WorkbookService { get; }
+        public IWorkbookService WorkbookService { get; }
     }
 }

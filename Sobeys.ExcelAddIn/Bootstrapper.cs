@@ -29,16 +29,16 @@ namespace Sobeys.ExcelAddIn
             _container.Compose(batch);
             _container.ComposeParts(_ribbon);
 
-            AddInService = _container.GetExportedValue<AddInService>();
+            AddInService = _container.GetExportedValue<IAddInService>();
 
             Globals.ThisAddIn.Application.WorkbookOpen += ApplicationWorkbookOpen;
             Globals.ThisAddIn.Application.WorkbookBeforeClose += ApplicationWorkbookBeforeClose;
             Globals.ThisAddIn.Application.WorkbookActivate += ApplicationWorkbookActivate;
         }
 
-        public AddInService AddInService { get; }
+        public IAddInService AddInService { get; }
 
-        public WorkbookService ActiveWorkbookService => _workbookContainers.ContainsKey(Globals.ThisAddIn.Application.ActiveWorkbook.FullName)
+        public IWorkbookService ActiveWorkbookService => _workbookContainers.ContainsKey(Globals.ThisAddIn.Application.ActiveWorkbook.FullName)
             ? _workbookContainers[Globals.ThisAddIn.Application.ActiveWorkbook.FullName].WorkbookService
             : null;
 
@@ -84,14 +84,17 @@ namespace Sobeys.ExcelAddIn
             var catalog = new AggregateCatalog();
             catalog.Catalogs.Add(_container.Catalog);
             var container = new CompositionContainer(catalog);
+
+            // Add singletons
             var batch = new CompositionBatch();
-            batch.AddExportedValue(_ribbon);
-            batch.AddExportedValue(Globals.ThisAddIn);
+            batch.AddExportedValue(_container.GetExportedValue<Ribbon>());
+            batch.AddExportedValue(_container.GetExportedValue<ThisAddIn>());
+            batch.AddExportedValue(_container.GetExportedValue<Bootstrapper>());
+            batch.AddExportedValue(_container.GetExportedValue<IAddInService>());
             batch.AddExportedValue(workbook);
-            batch.AddExportedValue(this);
             container.Compose(batch);
 
-            var workBookWrapper = container.GetExportedValue<WorkbookService>();
+            var workBookWrapper = container.GetExportedValue<IWorkbookService>();
             _workbookContainers.Add(workbook.FullName, new WorkbookContainer(container, workBookWrapper));
         }
 
