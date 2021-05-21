@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -24,17 +23,10 @@ namespace Sobeys.ExcelAddIn
             _ribbon.Invalidate();
         }
 
-
-        #region IRibbonExtensibility Members
-
-        public string GetCustomUI(string ribbonID)
+        public string GetCustomUI(string ribbonId)
         {
             return GetResourceText("Sobeys.ExcelAddIn.Ribbon.xml");
         }
-
-        #endregion
-
-        #region Ribbon Callbacks
 
         public bool GetWorkbookEnabled(Office.IRibbonControl control)
         {
@@ -56,10 +48,6 @@ namespace Sobeys.ExcelAddIn
             _ribbon = ribbonUI;
         }
 
-        #endregion
-
-        #region Helpers
-
         private static string GetResourceText(string resourceName)
         {
             Assembly asm = Assembly.GetExecutingAssembly();
@@ -79,7 +67,5 @@ namespace Sobeys.ExcelAddIn
             }
             return null;
         }
-
-        #endregion
     }
 }

@@ -9,7 +9,7 @@ using Office = Microsoft.Office.Core;
 
 namespace Sobeys.ExcelAddIn
 {
-    public class AddInWrapper : IAddInWrapper, IDisposable
+    public class AddInWrapper : IDisposable
     {
         private Ribbon _ribbon;
         private CompositionContainer _container;
@@ -27,14 +27,14 @@ namespace Sobeys.ExcelAddIn
 
             _workbookContainers = new Dictionary<string, WorkbookContainer>();
 
-            Globals.ThisAddIn.Application.WorkbookOpen += Application_WorkbookOpen;
-            Globals.ThisAddIn.Application.WorkbookBeforeClose += Application_WorkbookBeforeClose;
-            Globals.ThisAddIn.Application.WorkbookActivate += Application_WorkbookActivate;
+            Globals.ThisAddIn.Application.WorkbookOpen += ApplicationWorkbookOpen;
+            Globals.ThisAddIn.Application.WorkbookBeforeClose += ApplicationWorkbookBeforeClose;
+            Globals.ThisAddIn.Application.WorkbookActivate += ApplicationWorkbookActivate;
         }
 
         public void OnWorkbookAction(Office.IRibbonControl control)
         {
-            var activeWorkbook = GetActiveWorkbookWrapper();
+            var activeWorkbook = GetActiveWorkbookService();
             if (activeWorkbook != null)
             {
                 activeWorkbook.OnAction(control);
@@ -54,7 +54,7 @@ namespace Sobeys.ExcelAddIn
         public bool GetWorkbookEnabled(Office.IRibbonControl control)
         {
             
-            var activeWorkbook = GetActiveWorkbookWrapper();
+            var activeWorkbook = GetActiveWorkbookService();
             if (activeWorkbook != null)
             {
                 return activeWorkbook.GetEnabled(control);
@@ -75,18 +75,30 @@ namespace Sobeys.ExcelAddIn
             }
         }
 
-        private WorkbookService GetActiveWorkbookWrapper()
+        public void Dispose()
+        {
+            Globals.ThisAddIn.Application.WorkbookOpen -= ApplicationWorkbookOpen;
+            Globals.ThisAddIn.Application.WorkbookBeforeClose -= ApplicationWorkbookBeforeClose;
+            Globals.ThisAddIn.Application.WorkbookActivate -= ApplicationWorkbookActivate;
+
+            foreach (var workbookContainer in _workbookContainers)
+            {
+                RemoveWorkbook(workbookContainer.Key);
+            }
+        }
+
+        private WorkbookService GetActiveWorkbookService()
         {
             if (Globals.ThisAddIn.Application.ActiveWorkbook != null)
             {
-                return _workbookContainers[Globals.ThisAddIn.Application.ActiveWorkbook.FullName].WorkbookWrapper;
+                return _workbookContainers[Globals.ThisAddIn.Application.ActiveWorkbook.FullName].WorkbookService;
             }
 
             return null;
         }
 
 
-        private void Application_WorkbookActivate(Excel.Workbook workbook)
+        private void ApplicationWorkbookActivate(Excel.Workbook workbook)
         {
             if (!_workbookContainers.ContainsKey(workbook.FullName))
             {
@@ -96,7 +108,7 @@ namespace Sobeys.ExcelAddIn
             _ribbon.Invalidate();
         }
 
-        private void Application_WorkbookBeforeClose(Excel.Workbook workbook, ref bool cancel)
+        private void ApplicationWorkbookBeforeClose(Excel.Workbook workbook, ref bool cancel)
         {
             if (!cancel)
             {
@@ -104,7 +116,7 @@ namespace Sobeys.ExcelAddIn
             }
         }
 
-        private void Application_WorkbookOpen(Excel.Workbook workbook)
+        private void ApplicationWorkbookOpen(Excel.Workbook workbook)
         {
             AddWorkbook(workbook);
         }
@@ -130,18 +142,6 @@ namespace Sobeys.ExcelAddIn
             var container = _workbookContainers[key];
             container.Container.Dispose();
             _workbookContainers.Remove(key);
-        }
-
-        public void Dispose()
-        {
-            Globals.ThisAddIn.Application.WorkbookOpen -= Application_WorkbookOpen;
-            Globals.ThisAddIn.Application.WorkbookBeforeClose -= Application_WorkbookBeforeClose;
-            Globals.ThisAddIn.Application.WorkbookActivate -= Application_WorkbookActivate;
-
-            foreach (var workbookContainer in _workbookContainers)
-            {
-                RemoveWorkbook(workbookContainer.Key);
-            }
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Sobeys.ExcelAddIn.Services
         {
             _workbook = workbook;
             _ribbon = ribbon;
-            _workbook.SheetSelectionChange += _workbook_SheetSelectionChange;
+            _workbook.SheetSelectionChange += WorkbookSheetSelectionChange;
         }
 
         public void OnAction(Office.IRibbonControl control)
@@ -41,6 +41,11 @@ namespace Sobeys.ExcelAddIn.Services
                 default:
                     return true;
             }
+        }
+
+        public void Dispose()
+        {
+            _workbook.SheetSelectionChange -= WorkbookSheetSelectionChange;
         }
 
         private bool SuperCopyEnabled()
@@ -74,15 +79,9 @@ namespace Sobeys.ExcelAddIn.Services
             }
         }
 
-        public void Dispose()
-        {
-            _workbook.SheetSelectionChange -= _workbook_SheetSelectionChange;
-        }
-
-        private void _workbook_SheetSelectionChange(object Sh, Excel.Range Target)
+        private void WorkbookSheetSelectionChange(object shheet, Excel.Range target)
         {
             _ribbon.Invalidate();
         }
-
     }
 }
