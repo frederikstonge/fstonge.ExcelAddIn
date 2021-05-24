@@ -111,7 +111,7 @@ namespace Sobeys.ExcelAddIn.Services
 
                 var items = new List<string>();
 
-                var cells = (SuperCopyMode)Properties.Settings.Default.SuperCopyMode == SuperCopyMode.Column
+                var cells = Properties.Settings.Default.SuperCopyMode == SuperCopyMode.Column
                     ? range.Rows.OfType<Excel.Range>().Skip(Properties.Settings.Default.SuperCopySkipCells)
                     : range.Columns.OfType<Excel.Range>().Skip(Properties.Settings.Default.SuperCopySkipCells);
 
