@@ -108,6 +108,7 @@ namespace Sobeys.ExcelAddIn.Controls
             // SuperCopyMode
             // 
             this.SuperCopyMode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SuperCopyMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.SuperCopyMode.FormattingEnabled = true;
             this.SuperCopyMode.Location = new System.Drawing.Point(97, 31);
             this.SuperCopyMode.Name = "SuperCopyMode";
