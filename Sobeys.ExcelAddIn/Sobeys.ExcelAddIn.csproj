@@ -190,16 +190,28 @@
   -->
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Controls\SettingsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SettingsUserControl.Designer.cs">
+      <DependentUpon>SettingsUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="IRibbon.cs" />
     <Compile Include="Models\RibbonButtons.cs" />
+    <Compile Include="Models\SuperCopyMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\WorkbookContainer.cs" />
     <Compile Include="Services\AddInService.cs" />
     <Compile Include="Services\IAddInService.cs" />
+    <Compile Include="Services\ITaskPaneFactory.cs" />
     <Compile Include="Services\IWorkbookService.cs" />
+    <Compile Include="Services\TaskPaneFactory.cs" />
     <Compile Include="Services\WorkbookService.cs" />
+    <EmbeddedResource Include="Controls\SettingsUserControl.resx">
+      <DependentUpon>SettingsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -210,14 +222,16 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Ribbon.cs" />
     <Compile Include="ThisAddIn.cs">
@@ -239,6 +253,7 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

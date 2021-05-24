@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Windows.Forms;
+using Sobeys.ExcelAddIn.Controls;
 using Sobeys.ExcelAddIn.Models;
 using Excel = Microsoft.Office.Interop.Excel;
 using Office = Microsoft.Office.Core;
+using Tools = Microsoft.Office.Tools;
 
 namespace Sobeys.ExcelAddIn.Services
 {
@@ -14,13 +16,16 @@ namespace Sobeys.ExcelAddIn.Services
     {
         private readonly Excel.Workbook _workbook;
         private readonly IRibbon _ribbon;
+        private readonly Tools.CustomTaskPane _settingsTaskPane;
 
         [ImportingConstructor]
-        public WorkbookService(Excel.Workbook workbook, IRibbon ribbon)
+        public WorkbookService(Excel.Workbook workbook, IRibbon ribbon, ITaskPaneFactory taskPaneFactory)
         {
             _workbook = workbook;
             _ribbon = ribbon;
+            _settingsTaskPane = taskPaneFactory.CreateTaskPane(new SettingsUserControl(), "Settings", _workbook.Application.ActiveWindow, Office.MsoCTPDockPosition.msoCTPDockPositionRight);
             _workbook.SheetSelectionChange += WorkbookSheetSelectionChange;
+            _settingsTaskPane.VisibleChanged += SettingsTaskPaneVisibleChanged;
         }
 
         public void OnAction(Office.IRibbonControl control)
@@ -29,6 +34,17 @@ namespace Sobeys.ExcelAddIn.Services
             {
                 case RibbonButtons.SuperCopy:
                     SuperCopy();
+                    break;
+            }
+        }
+
+        public void OnPressedAction(Office.IRibbonControl control, bool isPressed)
+        {
+            switch (control.Id)
+            {
+                case RibbonButtons.Settings:
+                    _settingsTaskPane.Visible = isPressed;
+                    _ribbon.Invalidate();
                     break;
             }
         }
@@ -42,9 +58,20 @@ namespace Sobeys.ExcelAddIn.Services
             };
         }
 
+        public bool GetPressed(Office.IRibbonControl control)
+        {
+            return control.Id switch
+            {
+                RibbonButtons.Settings => _settingsTaskPane.Visible,
+                _ => true
+            };
+        }
+
         public void Dispose()
         {
             _workbook.SheetSelectionChange -= WorkbookSheetSelectionChange;
+            _settingsTaskPane.VisibleChanged -= SettingsTaskPaneVisibleChanged;
+            _settingsTaskPane.Dispose();
         }
 
         private bool SuperCopyEnabled()
@@ -79,6 +106,11 @@ namespace Sobeys.ExcelAddIn.Services
         }
 
         private void WorkbookSheetSelectionChange(object sheet, Excel.Range target)
+        {
+            _ribbon.Invalidate();
+        }
+
+        private void SettingsTaskPaneVisibleChanged(object sender, EventArgs e)
         {
             _ribbon.Invalidate();
         }

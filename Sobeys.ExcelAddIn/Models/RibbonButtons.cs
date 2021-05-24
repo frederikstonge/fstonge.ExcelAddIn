@@ -4,6 +4,8 @@
     {
         public const string SuperCopy = "SuperCopy";
 
+        public const string Settings = "Settings";
+
         public const string About = "About";
     }
 }
