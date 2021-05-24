@@ -134,7 +134,7 @@ namespace Sobeys.ExcelAddIn.Controls
             this.SuperCopyGroupBox.Size = new System.Drawing.Size(194, 107);
             this.SuperCopyGroupBox.TabIndex = 2;
             this.SuperCopyGroupBox.TabStop = false;
-            this.SuperCopyGroupBox.Text = "SuperCopy";
+            this.SuperCopyGroupBox.Text = "Super Copy";
             // 
             // LoadDefault
             // 
