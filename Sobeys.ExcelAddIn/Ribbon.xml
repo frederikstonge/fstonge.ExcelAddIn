@@ -7,6 +7,7 @@
 			<button size="large" id="SuperCopy" label="Super Copy" screentip="Super Copy" onAction="OnWorkbookAction" getEnabled="GetWorkbookEnabled" imageMso="Copy" supertip="Copy a column and separate values with ;" />
         </group>
 		  <group id="AboutGroup" label="About">
+			  <toggleButton size="large" id="Settings" label="Settings" screentip="Settings" getPressed="GetWorkbookPressed" getEnabled="GetWorkbookEnabled" onAction="OnWorkbookPressedAction" imageMso="ComAddInsDialog" supertip="Show settings tab"/>
 			  <button size="large" id="About" label="About" screentip="About" onAction="OnAction" getEnabled="GetEnabled" imageMso="About" supertip="Launch page for about" />
 		  </group>
       </tab>

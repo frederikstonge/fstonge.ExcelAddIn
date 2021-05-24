@@ -40,9 +40,19 @@ namespace Sobeys.ExcelAddIn
             Bootstrapper.ActiveWorkbookService?.OnAction(control);
         }
 
+        public void OnWorkbookPressedAction(Office.IRibbonControl control, bool isPressed)
+        {
+            Bootstrapper.ActiveWorkbookService?.OnPressedAction(control, isPressed);
+        }
+
         public void OnAction(Office.IRibbonControl control)
         {
             Bootstrapper.AddInService?.OnAction(control);
+        }
+
+        public bool GetWorkbookPressed(Office.IRibbonControl control)
+        {
+            return Bootstrapper.ActiveWorkbookService?.GetPressed(control) ?? false;
         }
 
         public void Ribbon_Load(Office.IRibbonUI ribbonUi)
