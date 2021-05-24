@@ -1,7 +1,7 @@
 # Sobeys Excel Power Tools Add-in
 VSTO Excel Addin I made for my brother working at sobeys
 
-![image](https://user-images.githubusercontent.com/5427239/119072494-8ec07d00-b9b9-11eb-95f6-e6f3351a530c.png)
+![image](https://user-images.githubusercontent.com/5427239/119414291-4c4eb700-bcbd-11eb-8064-a0bcbddc1161.png)
 
 ## Features:
 - SuperCopy (Copy X rows in 1 column and add ; in between)
