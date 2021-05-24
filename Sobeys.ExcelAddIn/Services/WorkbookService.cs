@@ -13,10 +13,10 @@ namespace Sobeys.ExcelAddIn.Services
     public class WorkbookService : IWorkbookService, IDisposable
     {
         private readonly Excel.Workbook _workbook;
-        private readonly Ribbon _ribbon;
+        private readonly IRibbon _ribbon;
 
         [ImportingConstructor]
-        public WorkbookService(Excel.Workbook workbook, Ribbon ribbon)
+        public WorkbookService(Excel.Workbook workbook, IRibbon ribbon)
         {
             _workbook = workbook;
             _ribbon = ribbon;

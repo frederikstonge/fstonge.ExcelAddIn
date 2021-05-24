@@ -10,11 +10,11 @@ namespace Sobeys.ExcelAddIn
 {
     public class Bootstrapper : IDisposable
     {
-        private readonly Ribbon _ribbon;
+        private readonly IRibbon _ribbon;
         private readonly CompositionContainer _container;
         private readonly Dictionary<string, WorkbookContainer> _workbookContainers;
 
-        public Bootstrapper(Ribbon ribbon)
+        public Bootstrapper(IRibbon ribbon)
         {
             _ribbon = ribbon;
             var catalog = new AggregateCatalog();
@@ -87,7 +87,7 @@ namespace Sobeys.ExcelAddIn
 
             // Add singletons
             var batch = new CompositionBatch();
-            batch.AddExportedValue(_container.GetExportedValue<Ribbon>());
+            batch.AddExportedValue(_container.GetExportedValue<IRibbon>());
             batch.AddExportedValue(_container.GetExportedValue<ThisAddIn>());
             batch.AddExportedValue(_container.GetExportedValue<Bootstrapper>());
             batch.AddExportedValue(_container.GetExportedValue<IAddInService>());

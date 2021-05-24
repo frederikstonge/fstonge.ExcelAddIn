@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="Sobeys.ExcelAddIn.Installer" Language="1033" Version="1.4.3.0" Manufacturer="Fred" UpgradeCode="6abd0447-f7d4-4e3a-9ddc-4e074085a547">
+	<Product Id="*" Name="Sobeys.ExcelAddIn.Installer" Language="1033" Version="1.4.4.0" Manufacturer="Fred" UpgradeCode="6abd0447-f7d4-4e3a-9ddc-4e074085a547">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perUser" />
 		<MajorUpgrade Schedule="afterInstallInitialize" AllowDowngrades="yes" />
 		<MediaTemplate EmbedCab="yes" />

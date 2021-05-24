@@ -33,7 +33,7 @@
     <PublishUrl>publish\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.4.3.0</ApplicationVersion>
+    <ApplicationVersion>1.4.4.0</ApplicationVersion>
     <AutoIncrementApplicationRevision>false</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>7</UpdateInterval>
@@ -190,6 +190,7 @@
   -->
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="IRibbon.cs" />
     <Compile Include="Models\RibbonButtons.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

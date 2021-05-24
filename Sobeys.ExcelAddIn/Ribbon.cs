@@ -8,7 +8,7 @@ using Office = Microsoft.Office.Core;
 namespace Sobeys.ExcelAddIn
 {
     [ComVisible(true)]
-    public class Ribbon : Office.IRibbonExtensibility
+    public class Ribbon : IRibbon, Office.IRibbonExtensibility
     {
         private Office.IRibbonUI _ribbon;
 

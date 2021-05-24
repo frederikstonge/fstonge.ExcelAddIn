@@ -14,7 +14,7 @@ namespace Sobeys.ExcelAddIn
 
         private Ribbon _ribbon;
 
-        private Bootstrapper _addInWrapper;
+        private Bootstrapper _bootstrapper;
 
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject()
         {
@@ -53,12 +53,12 @@ namespace Sobeys.ExcelAddIn
                 // ignored
             }
 
-            _addInWrapper = new Bootstrapper(_ribbon);
+            _bootstrapper = new Bootstrapper(_ribbon);
         }
 
         private void ThisAddIn_Shutdown(object sender, EventArgs e)
         {
-            _addInWrapper.Dispose();
+            _bootstrapper.Dispose();
         }
 
         private void InternalStartup()
