@@ -5,6 +5,7 @@ VSTO Excel Addin I made for my brother working at sobeys
 
 ## Features:
 - SuperCopy (Copy X rows in 1 column and add ; in between)
+- S
 - Update detection (Detect when a newer version of the add-in is available)
 
 ## Installation:
