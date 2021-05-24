@@ -89,7 +89,7 @@ namespace Sobeys.ExcelAddIn.Services
                 return false;
             }
 
-            if ((SuperCopyMode)Properties.Settings.Default.SuperCopyMode == SuperCopyMode.Column)
+            if (Properties.Settings.Default.SuperCopyMode == SuperCopyMode.Column)
             {
                 return range.Columns.Count == 1 && range.Rows.Count > 1;
             }

@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Sobeys.ExcelAddIn.Models;
 
@@ -18,7 +13,7 @@ namespace Sobeys.ExcelAddIn.Controls
             InitializeComponent();
             SuperCopyDelimiter.Text = Properties.Settings.Default.SuperCopyDelimiter;
             SuperCopyMode.DataSource = Enum.GetValues(typeof(SuperCopyMode));
-            SuperCopyMode.Text = ((SuperCopyMode)Properties.Settings.Default.SuperCopyMode).ToString("F");
+            SuperCopyMode.Text = Properties.Settings.Default.SuperCopyMode.ToString("F");
             SuperCopySkipCells.Value = Properties.Settings.Default.SuperCopySkipCells;
             SuperCopyDelimiter.TextChanged += Delimiter_TextChanged;
             SuperCopyMode.TextChanged += Mode_TextChanged;
@@ -46,9 +41,9 @@ namespace Sobeys.ExcelAddIn.Controls
 
         private void Mode_TextChanged(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default.SuperCopyMode != (int)Enum.Parse(typeof(SuperCopyMode), SuperCopyMode.Text))
+            if (Properties.Settings.Default.SuperCopyMode != (SuperCopyMode)Enum.Parse(typeof(SuperCopyMode), SuperCopyMode.Text))
             {
-                Properties.Settings.Default.SuperCopyMode = (int)Enum.Parse(typeof(SuperCopyMode), SuperCopyMode.Text);
+                Properties.Settings.Default.SuperCopyMode = (SuperCopyMode)Enum.Parse(typeof(SuperCopyMode), SuperCopyMode.Text);
             }
 
             Properties.Settings.Default.Save();

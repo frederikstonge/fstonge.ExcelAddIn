@@ -37,10 +37,10 @@ namespace Sobeys.ExcelAddIn.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int SuperCopyMode {
+        [global::System.Configuration.DefaultSettingValueAttribute("Column")]
+        public global::Sobeys.ExcelAddIn.Models.SuperCopyMode SuperCopyMode {
             get {
-                return ((int)(this["SuperCopyMode"]));
+                return ((global::Sobeys.ExcelAddIn.Models.SuperCopyMode)(this["SuperCopyMode"]));
             }
             set {
                 this["SuperCopyMode"] = value;

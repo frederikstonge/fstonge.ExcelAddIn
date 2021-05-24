@@ -5,8 +5,8 @@
     <Setting Name="SuperCopyDelimiter" Type="System.String" Scope="User">
       <Value Profile="(Default)">;</Value>
     </Setting>
-    <Setting Name="SuperCopyMode" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+    <Setting Name="SuperCopyMode" Type="Sobeys.ExcelAddIn.Models.SuperCopyMode" Scope="User">
+      <Value Profile="(Default)">Column</Value>
     </Setting>
     <Setting Name="SuperCopySkipCells" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
