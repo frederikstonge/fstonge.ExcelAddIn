@@ -6,6 +6,7 @@ using Tools = Microsoft.Office.Tools;
 namespace Sobeys.ExcelAddIn.Services
 {
     [Export(typeof(ITaskPaneFactory))]
+    [PartCreationPolicy(CreationPolicy.Shared)]
     public class TaskPaneFactory : ITaskPaneFactory
     {
         private readonly ThisAddIn _thisAddIn;
