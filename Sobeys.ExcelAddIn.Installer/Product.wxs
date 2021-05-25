@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="Sobeys.ExcelAddIn.Installer" Language="1033" Version="2.0.4.0" Manufacturer="Fred" UpgradeCode="6abd0447-f7d4-4e3a-9ddc-4e074085a547">
+	<Product Id="*" Name="Sobeys.ExcelAddIn.Installer" Language="1033" Version="2.0.5.0" Manufacturer="Fred" UpgradeCode="6abd0447-f7d4-4e3a-9ddc-4e074085a547">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perUser" />
 		<MajorUpgrade Schedule="afterInstallInitialize" AllowDowngrades="yes" />
 		<MediaTemplate EmbedCab="yes" />
@@ -71,6 +71,12 @@
 				</RegistryKey>
 				<File Id="MSOfficeToolsCommon_dll" Name="Microsoft.Office.Tools.Common.v4.0.Utilities.dll"
 					  Source="$(var.AddInFiles)"></File>
+			</Component>
+			<Component Id="Sobeys_ExcelAddIn_dll_config_Component" Directory="INSTALLFOLDER" Guid="9D4B8217-43C7-4376-894D-3C1533C36849">
+				<RegistryKey Root="HKCU" Key="Software\Sobeys\AddIn">
+					<RegistryValue Name="LibConfigFlag" Value="1" Type="string" KeyPath="yes" />
+				</RegistryKey>
+				<File Id="Sobeys_ExcelAddIn_Config_dll" Name="Sobeys.ExcelAddIn.dll.config" Source="$(var.AddInFiles)" />
 			</Component>
 			<Component Id="Sobeys_ExcelAddIn_dll_Component" Directory="INSTALLFOLDER" Guid="F9771D12-982B-4F08-BA77-A946728C13D5">
 				<RegistryKey Root="HKCU" Key="Software\Sobeys\AddIn">
