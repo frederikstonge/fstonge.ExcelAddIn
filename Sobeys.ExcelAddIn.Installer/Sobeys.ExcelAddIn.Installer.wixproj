@@ -13,13 +13,13 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
-    <DefineConstants>Debug;AddInFiles=..\Sobeys.ExcelAddIn\bin\$(Configuration)\</DefineConstants>
+    <DefineConstants>Debug;AddInFiles=..\Sobeys.ExcelAddIn\bin\$(Configuration)\;AddInFrFiles=..\Sobeys.ExcelAddIn\bin\$(Configuration)\fr\</DefineConstants>
     <SuppressIces>ICE91;ICE61</SuppressIces>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
-    <DefineConstants>AddInFiles=..\Sobeys.ExcelAddIn\bin\$(Configuration)\</DefineConstants>
+    <DefineConstants>AddInFiles=..\Sobeys.ExcelAddIn\bin\$(Configuration)\;AddInFrFiles=..\Sobeys.ExcelAddIn\bin\$(Configuration)\fr\</DefineConstants>
     <SuppressIces>ICE91;ICE61</SuppressIces>
   </PropertyGroup>
   <ItemGroup>
