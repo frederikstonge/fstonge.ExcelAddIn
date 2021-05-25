@@ -26,7 +26,7 @@ namespace Sobeys.ExcelAddIn.Services
             _ribbon = ribbon;
             _settingsTaskPane = taskPaneFactory.CreateTaskPane(
                 new SettingsUserControl(), 
-                "Settings",
+                Properties.Resources.Settings_Label,
                 _workbook.Application.ActiveWindow, 
                 Office.MsoCTPDockPosition.msoCTPDockPositionRight);
 
@@ -130,7 +130,7 @@ namespace Sobeys.ExcelAddIn.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "An error occurred");
+                MessageBox.Show(ex.Message, Properties.Resources.AnErrorOccurred);
             }
         }
 

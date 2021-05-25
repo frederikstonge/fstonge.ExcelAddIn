@@ -118,54 +118,54 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AnErrorOccurred" xml:space="preserve">
-    <value>An error occurred</value>
+    <value>Une erreur est survenue</value>
   </data>
   <data name="NewVersionMessage" xml:space="preserve">
-    <value>A newer version of the addin was detected, do you wish to download it?</value>
+    <value>Une nouvelle version de l'addin a été détectée, voulez-vous la télécharger?</value>
   </data>
   <data name="NewVersionTitle" xml:space="preserve">
-    <value>New version detected</value>
+    <value>Nouvelle version détectée</value>
   </data>
   <data name="Ribbon_About" xml:space="preserve">
-    <value>About</value>
+    <value>À Propos</value>
   </data>
   <data name="Ribbon_AboutGroup" xml:space="preserve">
-    <value>About</value>
+    <value>À Propos</value>
   </data>
   <data name="Ribbon_QuickActionGroup" xml:space="preserve">
-    <value>Quick Action</value>
+    <value>Action rapide</value>
   </data>
   <data name="Ribbon_Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Paramêtres</value>
   </data>
   <data name="Ribbon_Sobeys" xml:space="preserve">
     <value>Sobeys</value>
   </data>
   <data name="Ribbon_SuperCopy" xml:space="preserve">
-    <value>Super Copy</value>
+    <value>Super Copie</value>
   </data>
   <data name="Settings_DelimiterLabel" xml:space="preserve">
-    <value>Delimiter:</value>
+    <value>Séparateur:</value>
   </data>
   <data name="Settings_Label" xml:space="preserve">
-    <value>Settings</value>
+    <value>Paramêtres</value>
   </data>
   <data name="Settings_LoadDefaultLabel" xml:space="preserve">
-    <value>Load Default</value>
+    <value>Réinitialiser</value>
   </data>
   <data name="Settings_ModeLabel" xml:space="preserve">
     <value>Mode:</value>
   </data>
   <data name="Settings_SkipCellsLabel" xml:space="preserve">
-    <value>Skip Cells:</value>
+    <value>Ignorer cellules:</value>
   </data>
   <data name="Settings_SuperCopyLabel" xml:space="preserve">
-    <value>Super Copy</value>
+    <value>Super Copie</value>
   </data>
   <data name="SuperCopyMode_Column" xml:space="preserve">
-    <value>Column</value>
+    <value>Colonne</value>
   </data>
   <data name="SuperCopyMode_Row" xml:space="preserve">
-    <value>Row</value>
+    <value>Rangée</value>
   </data>
 </root>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Reflection;
 using System.Windows.Forms;
 using Microsoft.Office.Core;
@@ -23,6 +24,7 @@ namespace Sobeys.ExcelAddIn
 
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
+            SetupLanguage();
             ValidateNewerVersion();
             _bootstrapper = new Bootstrapper(_ribbon);
         }
@@ -30,6 +32,14 @@ namespace Sobeys.ExcelAddIn
         private void ThisAddIn_Shutdown(object sender, EventArgs e)
         {
             _bootstrapper.Dispose();
+        }
+
+        private void SetupLanguage()
+        {
+            var lcid = Globals.ThisAddIn.Application.LanguageSettings.LanguageID[MsoAppLanguageID.msoLanguageIDUI];
+            var culture = new CultureInfo(lcid);
+            System.Threading.Thread.CurrentThread.CurrentUICulture = culture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = culture;
         }
 
         private void ValidateNewerVersion()

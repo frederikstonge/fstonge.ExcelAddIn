@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
+using Microsoft.Office.Core;
 using Sobeys.ExcelAddIn.Models;
 using Sobeys.ExcelAddIn.Services;
 using Excel = Microsoft.Office.Interop.Excel;

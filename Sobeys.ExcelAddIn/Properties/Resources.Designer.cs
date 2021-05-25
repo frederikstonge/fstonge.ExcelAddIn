@@ -61,6 +61,15 @@ namespace Sobeys.ExcelAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occurred.
+        /// </summary>
+        internal static string AnErrorOccurred {
+            get {
+                return ResourceManager.GetString("AnErrorOccurred", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A newer version of the addin was detected, do you wish to download it?.
         /// </summary>
         internal static string NewVersionMessage {
@@ -75,6 +84,132 @@ namespace Sobeys.ExcelAddIn.Properties {
         internal static string NewVersionTitle {
             get {
                 return ResourceManager.GetString("NewVersionTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        internal static string Ribbon_About {
+            get {
+                return ResourceManager.GetString("Ribbon_About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        internal static string Ribbon_AboutGroup {
+            get {
+                return ResourceManager.GetString("Ribbon_AboutGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quick Action.
+        /// </summary>
+        internal static string Ribbon_QuickActionGroup {
+            get {
+                return ResourceManager.GetString("Ribbon_QuickActionGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string Ribbon_Settings {
+            get {
+                return ResourceManager.GetString("Ribbon_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sobeys.
+        /// </summary>
+        internal static string Ribbon_Sobeys {
+            get {
+                return ResourceManager.GetString("Ribbon_Sobeys", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Super Copy.
+        /// </summary>
+        internal static string Ribbon_SuperCopy {
+            get {
+                return ResourceManager.GetString("Ribbon_SuperCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delimiter:.
+        /// </summary>
+        internal static string Settings_DelimiterLabel {
+            get {
+                return ResourceManager.GetString("Settings_DelimiterLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string Settings_Label {
+            get {
+                return ResourceManager.GetString("Settings_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load Default.
+        /// </summary>
+        internal static string Settings_LoadDefaultLabel {
+            get {
+                return ResourceManager.GetString("Settings_LoadDefaultLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mode:.
+        /// </summary>
+        internal static string Settings_ModeLabel {
+            get {
+                return ResourceManager.GetString("Settings_ModeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skip Cells:.
+        /// </summary>
+        internal static string Settings_SkipCellsLabel {
+            get {
+                return ResourceManager.GetString("Settings_SkipCellsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Super Copy.
+        /// </summary>
+        internal static string Settings_SuperCopyLabel {
+            get {
+                return ResourceManager.GetString("Settings_SuperCopyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Column.
+        /// </summary>
+        internal static string SuperCopyMode_Column {
+            get {
+                return ResourceManager.GetString("SuperCopyMode_Column", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Row.
+        /// </summary>
+        internal static string SuperCopyMode_Row {
+            get {
+                return ResourceManager.GetString("SuperCopyMode_Row", resourceCulture);
             }
         }
     }

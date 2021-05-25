@@ -34,6 +34,11 @@ namespace Sobeys.ExcelAddIn
         {
             return Bootstrapper.AddInService?.GetEnabled(control) ?? false;
         }
+        
+        public string GetLabel(Office.IRibbonControl control)
+        {
+            return Properties.Resources.ResourceManager.GetString($"Ribbon_{control.Id}");
+        }
 
         public void OnWorkbookAction(Office.IRibbonControl control)
         {

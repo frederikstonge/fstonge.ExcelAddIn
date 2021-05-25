@@ -12,15 +12,32 @@ namespace Sobeys.ExcelAddIn.Controls
         {
             InitializeComponent();
 
+            SuperCopyGroupBox.Text = Properties.Resources.Settings_SuperCopyLabel;
+
+            DelimiterLabel.Text = Properties.Resources.Settings_DelimiterLabel;
             SuperCopyDelimiter.Text = Properties.Settings.Default.SuperCopyDelimiter;
 
-            SuperCopyMode.DataSource = Enum.GetValues(typeof(SuperCopyMode));
+            ModeLabel.Text = Properties.Resources.Settings_ModeLabel;
+            SuperCopyMode.DataSource = Enum.GetValues(typeof(SuperCopyMode))
+                .OfType<SuperCopyMode>()
+                .Select(s => new
+                {
+                    Key = s, 
+                    Value = Properties.Resources.ResourceManager.GetString($"SuperCopyMode_{s:F}")
+                })
+                .ToList();
+            SuperCopyMode.DisplayMember = "Value";
+            SuperCopyMode.ValueMember = "Key";
+
             SuperCopyMode.Text = Properties.Settings.Default.SuperCopyMode.ToString("F");
 
+            SkipCellsLabel.Text = Properties.Resources.Settings_SkipCellsLabel;
             SuperCopySkipCells.Value = Properties.Settings.Default.SuperCopySkipCells;
 
+            LoadDefault.Text = Properties.Resources.Settings_LoadDefaultLabel;
+
             SuperCopyDelimiter.TextChanged += Delimiter_TextChanged;
-            SuperCopyMode.TextChanged += Mode_TextChanged;
+            SuperCopyMode.SelectedValueChanged += Mode_SelectedValueChanged;
             SuperCopySkipCells.ValueChanged += SkipCells_ValueChanged;
             Properties.Settings.Default.PropertyChanged += Default_PropertyChanged;
             LoadDefault.Click += LoadDefault_Click;
@@ -43,11 +60,11 @@ namespace Sobeys.ExcelAddIn.Controls
             Properties.Settings.Default.Save();
         }
 
-        private void Mode_TextChanged(object sender, EventArgs e)
+        private void Mode_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default.SuperCopyMode != (SuperCopyMode)Enum.Parse(typeof(SuperCopyMode), SuperCopyMode.Text))
+            if (Properties.Settings.Default.SuperCopyMode != (SuperCopyMode)SuperCopyMode.SelectedValue)
             {
-                Properties.Settings.Default.SuperCopyMode = (SuperCopyMode)Enum.Parse(typeof(SuperCopyMode), SuperCopyMode.Text);
+                Properties.Settings.Default.SuperCopyMode = (SuperCopyMode)SuperCopyMode.SelectedValue;
             }
 
             Properties.Settings.Default.Save();
