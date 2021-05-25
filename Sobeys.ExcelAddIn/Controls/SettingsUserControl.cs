@@ -11,10 +11,14 @@ namespace Sobeys.ExcelAddIn.Controls
         public SettingsUserControl()
         {
             InitializeComponent();
+
             SuperCopyDelimiter.Text = Properties.Settings.Default.SuperCopyDelimiter;
+
             SuperCopyMode.DataSource = Enum.GetValues(typeof(SuperCopyMode));
             SuperCopyMode.Text = Properties.Settings.Default.SuperCopyMode.ToString("F");
+
             SuperCopySkipCells.Value = Properties.Settings.Default.SuperCopySkipCells;
+
             SuperCopyDelimiter.TextChanged += Delimiter_TextChanged;
             SuperCopyMode.TextChanged += Mode_TextChanged;
             SuperCopySkipCells.ValueChanged += SkipCells_ValueChanged;

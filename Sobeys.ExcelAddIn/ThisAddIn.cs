@@ -13,7 +13,6 @@ namespace Sobeys.ExcelAddIn
         private const string GithubProject = "sobeys-excel-addin";
 
         private Ribbon _ribbon;
-
         private Bootstrapper _bootstrapper;
 
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject()
@@ -23,6 +22,17 @@ namespace Sobeys.ExcelAddIn
         }
 
         private void ThisAddIn_Startup(object sender, EventArgs e)
+        {
+            ValidateNewerVersion();
+            _bootstrapper = new Bootstrapper(_ribbon);
+        }
+
+        private void ThisAddIn_Shutdown(object sender, EventArgs e)
+        {
+            _bootstrapper.Dispose();
+        }
+
+        private void ValidateNewerVersion()
         {
             try
             {
@@ -52,13 +62,6 @@ namespace Sobeys.ExcelAddIn
             {
                 // ignored
             }
-
-            _bootstrapper = new Bootstrapper(_ribbon);
-        }
-
-        private void ThisAddIn_Shutdown(object sender, EventArgs e)
-        {
-            _bootstrapper.Dispose();
         }
 
         private void InternalStartup()
