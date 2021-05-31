@@ -8,7 +8,7 @@ using Octokit;
 
 namespace Sobeys.ExcelAddIn
 {
-    public partial class ThisAddIn
+    public partial class AddIn
     {
         private const string GithubUsername = "frederikstonge";
         private const string GithubProject = "sobeys-excel-addin";
@@ -22,21 +22,21 @@ namespace Sobeys.ExcelAddIn
             return _ribbon;
         }
 
-        private void ThisAddIn_Startup(object sender, EventArgs e)
+        private void AddIn_Startup(object sender, EventArgs e)
         {
             SetupLanguage();
             ValidateNewerVersion();
             _bootstrapper = new Bootstrapper(_ribbon);
         }
 
-        private void ThisAddIn_Shutdown(object sender, EventArgs e)
+        private void AddIn_Shutdown(object sender, EventArgs e)
         {
             _bootstrapper.Dispose();
         }
 
         private void SetupLanguage()
         {
-            var lcid = Globals.ThisAddIn.Application.LanguageSettings.LanguageID[MsoAppLanguageID.msoLanguageIDUI];
+            var lcid = Globals.AddIn.Application.LanguageSettings.LanguageID[MsoAppLanguageID.msoLanguageIDUI];
             var culture = new CultureInfo(lcid);
             System.Threading.Thread.CurrentThread.CurrentUICulture = culture;
             System.Threading.Thread.CurrentThread.CurrentCulture = culture;
@@ -52,7 +52,7 @@ namespace Sobeys.ExcelAddIn
                 var latestRelease = releases[0];
 
                 var latestGitHubVersion = Version.Parse(latestRelease.TagName);
-                var localVersion = Assembly.GetAssembly(typeof(ThisAddIn)).GetName().Version;
+                var localVersion = Assembly.GetAssembly(typeof(AddIn)).GetName().Version;
 
                 int versionComparison = localVersion.CompareTo(latestGitHubVersion);
                 if (versionComparison < 0)
@@ -76,8 +76,8 @@ namespace Sobeys.ExcelAddIn
 
         private void InternalStartup()
         {
-            Startup += ThisAddIn_Startup;
-            Shutdown += ThisAddIn_Shutdown;
+            Startup += AddIn_Startup;
+            Shutdown += AddIn_Shutdown;
         }
     }
 }

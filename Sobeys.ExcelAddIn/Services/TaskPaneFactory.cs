@@ -9,10 +9,10 @@ namespace Sobeys.ExcelAddIn.Services
     [PartCreationPolicy(CreationPolicy.Shared)]
     public class TaskPaneFactory : ITaskPaneFactory
     {
-        private readonly ThisAddIn _thisAddIn;
+        private readonly AddIn _thisAddIn;
 
         [ImportingConstructor]
-        public TaskPaneFactory(ThisAddIn thisAddIn)
+        public TaskPaneFactory(AddIn thisAddIn)
         {
             _thisAddIn = thisAddIn;
         }

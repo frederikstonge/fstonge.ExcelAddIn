@@ -25,29 +25,29 @@ namespace Sobeys.ExcelAddIn
 
             var batch = new CompositionBatch();
             batch.AddExportedValue(_ribbon);
-            batch.AddExportedValue(Globals.ThisAddIn);
+            batch.AddExportedValue(Globals.AddIn);
             batch.AddExportedValue(this);
             _container.Compose(batch);
             _container.ComposeParts(_ribbon);
 
             AddInService = _container.GetExportedValue<IAddInService>();
 
-            Globals.ThisAddIn.Application.WorkbookOpen += ApplicationWorkbookOpen;
-            Globals.ThisAddIn.Application.WorkbookBeforeClose += ApplicationWorkbookBeforeClose;
-            Globals.ThisAddIn.Application.WorkbookActivate += ApplicationWorkbookActivate;
+            Globals.AddIn.Application.WorkbookOpen += ApplicationWorkbookOpen;
+            Globals.AddIn.Application.WorkbookBeforeClose += ApplicationWorkbookBeforeClose;
+            Globals.AddIn.Application.WorkbookActivate += ApplicationWorkbookActivate;
         }
 
         public IAddInService AddInService { get; }
 
-        public IWorkbookService ActiveWorkbookService => _workbookContainers.ContainsKey(Globals.ThisAddIn.Application.ActiveWorkbook.FullName)
-            ? _workbookContainers[Globals.ThisAddIn.Application.ActiveWorkbook.FullName].WorkbookService
+        public IWorkbookService ActiveWorkbookService => _workbookContainers.ContainsKey(Globals.AddIn.Application.ActiveWorkbook.FullName)
+            ? _workbookContainers[Globals.AddIn.Application.ActiveWorkbook.FullName].WorkbookService
             : null;
 
         public void Dispose()
         {
-            Globals.ThisAddIn.Application.WorkbookOpen -= ApplicationWorkbookOpen;
-            Globals.ThisAddIn.Application.WorkbookBeforeClose -= ApplicationWorkbookBeforeClose;
-            Globals.ThisAddIn.Application.WorkbookActivate -= ApplicationWorkbookActivate;
+            Globals.AddIn.Application.WorkbookOpen -= ApplicationWorkbookOpen;
+            Globals.AddIn.Application.WorkbookBeforeClose -= ApplicationWorkbookBeforeClose;
+            Globals.AddIn.Application.WorkbookActivate -= ApplicationWorkbookActivate;
 
             foreach (var workbookContainer in _workbookContainers)
             {
@@ -89,14 +89,14 @@ namespace Sobeys.ExcelAddIn
             // Add singletons
             var batch = new CompositionBatch();
             batch.AddExportedValue(_container.GetExportedValue<IRibbon>());
-            batch.AddExportedValue(_container.GetExportedValue<ThisAddIn>());
+            batch.AddExportedValue(_container.GetExportedValue<AddIn>());
             batch.AddExportedValue(_container.GetExportedValue<Bootstrapper>());
             batch.AddExportedValue(_container.GetExportedValue<IAddInService>());
             batch.AddExportedValue(workbook);
             container.Compose(batch);
 
-            var workBookWrapper = container.GetExportedValue<IWorkbookService>();
-            _workbookContainers.Add(workbook.FullName, new WorkbookContainer(container, workBookWrapper));
+            var workBookService = container.GetExportedValue<IWorkbookService>();
+            _workbookContainers.Add(workbook.FullName, new WorkbookContainer(container, workBookService));
         }
 
         private void RemoveWorkbook(string key)

@@ -15,7 +15,7 @@ namespace Sobeys.ExcelAddIn {
     /// 
     [Microsoft.VisualStudio.Tools.Applications.Runtime.StartupObjectAttribute(0)]
     [global::System.Security.Permissions.PermissionSetAttribute(global::System.Security.Permissions.SecurityAction.Demand, Name="FullTrust")]
-    public sealed partial class ThisAddIn : Microsoft.Office.Tools.AddInBase {
+    public sealed partial class AddIn : Microsoft.Office.Tools.AddInBase {
         
         internal Microsoft.Office.Tools.CustomTaskPaneCollection CustomTaskPanes;
         
@@ -30,8 +30,8 @@ namespace Sobeys.ExcelAddIn {
         /// 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public ThisAddIn(global::Microsoft.Office.Tools.Excel.ApplicationFactory factory, global::System.IServiceProvider serviceProvider) : 
-                base(factory, serviceProvider, "AddIn", "ThisAddIn") {
+        public AddIn(global::Microsoft.Office.Tools.Excel.ApplicationFactory factory, global::System.IServiceProvider serviceProvider) : 
+                base(factory, serviceProvider, "AddIn", "AddIn") {
             Globals.Factory = factory;
         }
         
@@ -42,7 +42,7 @@ namespace Sobeys.ExcelAddIn {
         protected override void Initialize() {
             base.Initialize();
             this.Application = this.GetHostItem<Microsoft.Office.Interop.Excel.Application>(typeof(Microsoft.Office.Interop.Excel.Application), "Application");
-            Globals.ThisAddIn = this;
+            Globals.AddIn = this;
             global::System.Windows.Forms.Application.EnableVisualStyles();
             this.InitializeCachedData();
             this.InitializeControls();
@@ -180,19 +180,19 @@ namespace Sobeys.ExcelAddIn {
         private Globals() {
         }
         
-        private static ThisAddIn _ThisAddIn;
+        private static AddIn _AddIn;
         
         private static global::Microsoft.Office.Tools.Excel.ApplicationFactory _factory;
         
-        private static ThisRibbonCollection _ThisRibbonCollection;
+        private static RibbonCollection _RibbonCollection;
         
-        internal static ThisAddIn ThisAddIn {
+        internal static AddIn AddIn {
             get {
-                return _ThisAddIn;
+                return _AddIn;
             }
             set {
-                if ((_ThisAddIn == null)) {
-                    _ThisAddIn = value;
+                if ((_AddIn == null)) {
+                    _AddIn = value;
                 }
                 else {
                     throw new System.NotSupportedException();
@@ -214,12 +214,12 @@ namespace Sobeys.ExcelAddIn {
             }
         }
         
-        internal static ThisRibbonCollection Ribbons {
+        internal static RibbonCollection Ribbons {
             get {
-                if ((_ThisRibbonCollection == null)) {
-                    _ThisRibbonCollection = new ThisRibbonCollection(_factory.GetRibbonFactory());
+                if ((_RibbonCollection == null)) {
+                    _RibbonCollection = new RibbonCollection(_factory.GetRibbonFactory());
                 }
-                return _ThisRibbonCollection;
+                return _RibbonCollection;
             }
         }
     }
@@ -227,10 +227,10 @@ namespace Sobeys.ExcelAddIn {
     /// 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "16.0.0.0")]
-    internal sealed partial class ThisRibbonCollection : Microsoft.Office.Tools.Ribbon.RibbonCollectionBase {
+    internal sealed partial class RibbonCollection : Microsoft.Office.Tools.Ribbon.RibbonCollectionBase {
         
         /// 
-        internal ThisRibbonCollection(global::Microsoft.Office.Tools.Ribbon.RibbonFactory factory) : 
+        internal RibbonCollection(global::Microsoft.Office.Tools.Ribbon.RibbonFactory factory) : 
                 base(factory) {
         }
     }
