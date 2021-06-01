@@ -19,33 +19,33 @@
 			<Directory Id="AppDataFolder">
 				<Directory Id="INSTALLFOLDER" Name="SobeysExcelAddIn">
 					<Directory Id="FrFolder" Name="fr">
-						<Component Id="Registry_FriendlyName">
-							<RegistryValue Id="RegKey_FriendlyName" Root="HKCU"
-							               Key="Software\Microsoft\Office\Excel\AddIns\Sobeys.ExcelAddIn"
-							               Name="FriendlyName"
-							               Value="Sobeys Excel Add-In"
-							               Type="string" KeyPath="yes" />
-						</Component>
-						<Component Id="Registry_Description">
-							<RegistryValue Id="RegKey_Description" Root="HKCU"
-							               Key="Software\Microsoft\Office\Excel\AddIns\Sobeys.ExcelAddIn"
-							               Name="Description"
-							               Value="Sobeys Excel Add-In"
-							               Type="string" KeyPath="yes" />
-						</Component>
-						<Component Id="Registry_Manifest">
-							<RegistryValue Id="RegKey_Manifest" Root="HKCU"
-							               Key="Software\Microsoft\Office\Excel\AddIns\Sobeys.ExcelAddIn"
-							               Name="Manifest" Value="[INSTALLFOLDER]Sobeys.ExcelAddIn.vsto|vstolocal"
-							               Type="string" KeyPath="yes" />
-						</Component>
-						<Component Id="Registry_LoadBehavior">
-							<RegistryValue Id="RegKey_LoadBehavior" Root="HKCU"
-							               Key="Software\Microsoft\Office\Excel\AddIns\Sobeys.ExcelAddIn"
-							               Name="LoadBehavior" Value="3"
-							               Type="integer" KeyPath="yes" />
-						</Component>
 					</Directory>
+					<Component Id="Registry_FriendlyName">
+						<RegistryValue Id="RegKey_FriendlyName" Root="HKCU"
+						               Key="Software\Microsoft\Office\Excel\AddIns\Sobeys.ExcelAddIn"
+						               Name="FriendlyName"
+						               Value="Sobeys Excel Add-In"
+						               Type="string" KeyPath="yes" />
+					</Component>
+					<Component Id="Registry_Description">
+						<RegistryValue Id="RegKey_Description" Root="HKCU"
+						               Key="Software\Microsoft\Office\Excel\AddIns\Sobeys.ExcelAddIn"
+						               Name="Description"
+						               Value="Sobeys Excel Add-In"
+						               Type="string" KeyPath="yes" />
+					</Component>
+					<Component Id="Registry_Manifest">
+						<RegistryValue Id="RegKey_Manifest" Root="HKCU"
+						               Key="Software\Microsoft\Office\Excel\AddIns\Sobeys.ExcelAddIn"
+						               Name="Manifest" Value="[INSTALLFOLDER]Sobeys.ExcelAddIn.vsto|vstolocal"
+						               Type="string" KeyPath="yes" />
+					</Component>
+					<Component Id="Registry_LoadBehavior">
+						<RegistryValue Id="RegKey_LoadBehavior" Root="HKCU"
+						               Key="Software\Microsoft\Office\Excel\AddIns\Sobeys.ExcelAddIn"
+						               Name="LoadBehavior" Value="3"
+						               Type="integer" KeyPath="yes" />
+					</Component>
 				</Directory>
 			</Directory>
 		</Directory>
@@ -101,7 +101,7 @@
 				<RegistryKey Root="HKCU" Key="Software\Sobeys\AddIn\fr">
 					<RegistryValue Name="LibFrFlag" Value="1" Type="string" KeyPath="yes" />
 				</RegistryKey>
-				<File Id="Sobeys_ExcelAddIn_resources_dll" Name="Sobeys.ExcelAddIn.resources.dll" Source="$(var.AddInFrFiles)" />
+				<File Id="Sobeys_ExcelAddIn_resources_dll" Name="Sobeys.ExcelAddIn.resources.dll" Source="$(var.AddInFiles)\fr" />
 				<RemoveFolder Id="FrFolder" On="uninstall" />
 			</Component>
 		</ComponentGroup>
