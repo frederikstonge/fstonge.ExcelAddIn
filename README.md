@@ -8,5 +8,9 @@ VSTO Excel Addin I made for my brother working at sobeys
 - Settings configurable in a Custom Task Pane
 - Update detection (Detect when a newer version of the add-in is available)
 
+## Technologies
+- VSTO
+- Squirrel
+
 ## Installation:
-Just run the .msi, it will install the required files and register the add-in in Excel. It doesn't require admin rights since the installation is only for the current user.
+Just run the Setup, it will install the required files and register the add-in in Excel. It doesn't require admin rights since the installation is only for the current user.

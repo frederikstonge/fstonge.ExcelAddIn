@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Globalization;
-using System.Reflection;
+using System.IO;
 using System.Windows.Forms;
 using Microsoft.Office.Core;
-using Octokit;
+using Sobeys.ExcelAddIn.Updater;
 
 namespace Sobeys.ExcelAddIn
 {
     public partial class AddIn
     {
-        private const string GithubUsername = "frederikstonge";
-        private const string GithubProject = "sobeys-excel-addin";
-
         private Ribbon _ribbon;
         private Bootstrapper _bootstrapper;
 
@@ -44,34 +41,30 @@ namespace Sobeys.ExcelAddIn
 
         private void ValidateNewerVersion()
         {
+#if !DEBUG
             try
             {
-                var client = new GitHubClient(new ProductHeaderValue(GithubProject));
-                var releases = client.Repository.Release.GetAll(GithubUsername, GithubProject).Result;
-
-                var latestRelease = releases[0];
-
-                var latestGitHubVersion = Version.Parse(latestRelease.TagName);
-                var localVersion = Assembly.GetAssembly(typeof(AddIn)).GetName().Version;
-
-                int versionComparison = localVersion.CompareTo(latestGitHubVersion);
-                if (versionComparison < 0)
+                var installationPath = PathHelper.GetInstallationPath();
+                var version = typeof(AddIn).Assembly.GetName().Version;
+                var path = Path.Combine(installationPath, $"app-{version.ToString(3)}", "Sobeys.ExcelAddIn.Updater.exe");
+                var process = new Process
                 {
-                    var result = MessageBox.Show(
-                        Properties.Resources.NewVersionMessage,
-                        Properties.Resources.NewVersionTitle,
-                        MessageBoxButtons.YesNo);
-
-                    if (result == DialogResult.Yes)
+                    StartInfo =
                     {
-                        Process.Start($"https://github.com/{GithubUsername}/{GithubProject}/releases/tag/{latestRelease.TagName}");
+                        UseShellExecute = false,
+                        CreateNoWindow = true,
+                        WindowStyle = ProcessWindowStyle.Hidden,
+                        FileName = path
                     }
-                }
+                };
+                process.Start();
+                process.WaitForExit();
             }
-            catch
+            catch (Exception ex)
             {
-                // ignored
+                MessageBox.Show(ex.StackTrace, ex.Message);
             }
+#endif
         }
 
         private void InternalStartup()
