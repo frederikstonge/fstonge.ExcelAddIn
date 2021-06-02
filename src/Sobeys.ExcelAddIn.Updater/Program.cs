@@ -8,7 +8,7 @@ using Squirrel;
 
 namespace Sobeys.ExcelAddIn.Updater
 {
-    class Program
+    public class Program
     {
         private const string GithubUsername = "frederikstonge";
         private const string GithubProject = "sobeys-excel-addin";
@@ -65,7 +65,8 @@ namespace Sobeys.ExcelAddIn.Updater
 
         private static void CreateRegistryEntries(Version version)
         {
-            var manifestPath = Path.Combine(PathHelper.GetInstallationPath(),
+            var manifestPath = Path.Combine(
+                PathHelper.GetInstallationPath(),
                 $"app-{version.ToString(3)}",
                 "Sobeys.ExcelAddIn.vsto")
                 + "|vstolocal";
