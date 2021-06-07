@@ -7,7 +7,7 @@ namespace Sobeys.ExcelAddIn.Updater
     {
         public static string GetInstallationPath()
         {
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Sobeys");
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SobeysExcelAddIn");
         }
     }
 }
