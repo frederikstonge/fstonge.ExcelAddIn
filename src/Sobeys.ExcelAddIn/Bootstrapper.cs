@@ -39,7 +39,8 @@ namespace Sobeys.ExcelAddIn
 
         public IAddInService AddInService { get; }
 
-        public IWorkbookService ActiveWorkbookService => _workbookContainers.ContainsKey(Globals.AddIn.Application.ActiveWorkbook.FullName)
+        public IWorkbookService ActiveWorkbookService => 
+            _workbookContainers.ContainsKey(Globals.AddIn.Application.ActiveWorkbook.FullName)
             ? _workbookContainers[Globals.AddIn.Application.ActiveWorkbook.FullName].WorkbookService
             : null;
 

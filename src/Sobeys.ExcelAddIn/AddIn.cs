@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Windows.Forms;
 using Microsoft.Office.Core;
 using Sobeys.ExcelAddIn.Updater;
 
@@ -41,30 +40,36 @@ namespace Sobeys.ExcelAddIn
 
         private void ValidateNewerVersion()
         {
-#if !DEBUG
-            try
+            if (Application.Visible)
             {
-                var installationPath = PathHelper.GetInstallationPath();
-                var version = typeof(AddIn).Assembly.GetName().Version;
-                var path = Path.Combine(installationPath, $"app-{version.ToString(3)}", "Sobeys.ExcelAddIn.Updater.exe");
-                var process = new Process
+                try
                 {
-                    StartInfo =
+                    var installationPath = PathHelper.GetInstallationPath();
+
+                    var version = typeof(AddIn).Assembly.GetName().Version;
+
+                    var path = Path.Combine(
+                        installationPath, 
+                        $"app-{version.ToString(3)}",
+                        "Sobeys.ExcelAddIn.Updater.exe");
+
+                    var process = new Process
                     {
-                        UseShellExecute = false,
-                        CreateNoWindow = true,
-                        WindowStyle = ProcessWindowStyle.Hidden,
-                        FileName = path
-                    }
-                };
-                process.Start();
-                process.WaitForExit();
+                        StartInfo =
+                        {
+                            UseShellExecute = false,
+                            CreateNoWindow = true,
+                            WindowStyle = ProcessWindowStyle.Hidden,
+                            FileName = path
+                        }
+                    };
+                    process.Start();
+                }
+                catch
+                {
+                    // ignored
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.StackTrace, ex.Message);
-            }
-#endif
         }
 
         private void InternalStartup()

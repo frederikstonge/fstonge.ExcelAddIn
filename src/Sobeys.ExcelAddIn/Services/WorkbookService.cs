@@ -128,9 +128,9 @@ namespace Sobeys.ExcelAddIn.Services
                
                 System.Windows.Clipboard.SetText(string.Join(Properties.Settings.Default.SuperCopyDelimiter, items));
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message, Properties.Resources.AnErrorOccurred);
+                // ignored
             }
         }
 

@@ -359,6 +359,6 @@
     <!-- build into the local bin\Release\ directory temporarily -->
     <Exec Command="&quot;%(NuGetCommandLine.FullPath)&quot; pack $(NuSpecFile) -Version $(SemVerNumber) -Properties Configuration=Release -OutputDirectory $(OutDir) -BasePath $(OutDir)" />
     <!-- squirrelify into the release dir (usually at project level.  change the property above for a different location -->
-    <Exec Command="&quot;%(Squirrel.FullPath)&quot; --releasify $(OutDir)Sobeys.ExcelAddIn.$(SemVerNumber).nupkg --releaseDir=$(ReleaseDir) $(SquirrelParams)" />
+    <Exec Command="&quot;%(Squirrel.FullPath)&quot; --releasify $(OutDir)SobeysExcelAddIn.$(SemVerNumber).nupkg --releaseDir=$(ReleaseDir) $(SquirrelParams)" />
   </Target>
 </Project>
