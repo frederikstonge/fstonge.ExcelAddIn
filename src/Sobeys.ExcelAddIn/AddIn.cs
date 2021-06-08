@@ -40,6 +40,7 @@ namespace Sobeys.ExcelAddIn
 
         private void ValidateNewerVersion()
         {
+#if !DEBUG
             if (Application.Visible)
             {
                 try
@@ -70,6 +71,7 @@ namespace Sobeys.ExcelAddIn
                     // ignored
                 }
             }
+#endif
         }
 
         private void InternalStartup()
