@@ -39,7 +39,7 @@ namespace Sobeys.ExcelAddIn.Services
             switch (control.Id)
             {
                 case RibbonButtons.SuperCopy:
-                    SuperCopy();
+                    SuperCopy(GetUsedSelectionRange());
                     break;
             }
         }
@@ -59,7 +59,7 @@ namespace Sobeys.ExcelAddIn.Services
         {
             return control.Id switch
             {
-                RibbonButtons.SuperCopy => SuperCopyEnabled(),
+                RibbonButtons.SuperCopy => SuperCopyEnabled(GetUsedSelectionRange()),
                 _ => true
             };
         }
@@ -80,9 +80,8 @@ namespace Sobeys.ExcelAddIn.Services
             _settingsTaskPane.Dispose();
         }
 
-        private bool SuperCopyEnabled()
+        private bool SuperCopyEnabled(Excel.Range range)
         {
-            Excel.Range range = GetUsedSelectionRange();
 
             if (range == null)
             {
@@ -99,16 +98,14 @@ namespace Sobeys.ExcelAddIn.Services
             }
         }
 
-        private void SuperCopy()
+        private void SuperCopy(Excel.Range range)
         {
             try
             {
-                if (!SuperCopyEnabled())
+                if (!SuperCopyEnabled(range))
                 {
                     return;
                 }
-
-                Excel.Range range = GetUsedSelectionRange();
 
                 var items = new List<string>();
 
