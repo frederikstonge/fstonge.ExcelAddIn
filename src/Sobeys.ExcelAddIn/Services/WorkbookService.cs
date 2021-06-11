@@ -82,7 +82,6 @@ namespace Sobeys.ExcelAddIn.Services
 
         private bool SuperCopyEnabled(Excel.Range range)
         {
-
             if (range == null)
             {
                 return false;
