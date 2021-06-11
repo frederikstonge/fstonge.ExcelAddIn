@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Windows.Forms;
 using Sobeys.ExcelAddIn.Controls;
 using Sobeys.ExcelAddIn.Models;
 using Excel = Microsoft.Office.Interop.Excel;
@@ -24,6 +23,7 @@ namespace Sobeys.ExcelAddIn.Services
         {
             _workbook = workbook;
             _ribbon = ribbon;
+
             _settingsTaskPane = taskPaneFactory.CreateTaskPane(
                 new SettingsUserControl(), 
                 Properties.Resources.Settings_Label,
@@ -103,11 +103,12 @@ namespace Sobeys.ExcelAddIn.Services
         {
             try
             {
-                Excel.Range range = GetUsedSelectionRange();
-                if (range == null)
+                if (!SuperCopyEnabled())
                 {
                     return;
                 }
+
+                Excel.Range range = GetUsedSelectionRange();
 
                 var items = new List<string>();
 
