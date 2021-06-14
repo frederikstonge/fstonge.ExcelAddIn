@@ -352,7 +352,7 @@
       <NuSpecFile>Sobeys.ExcelAddIn.nuspec</NuSpecFile>
       <ReleaseDir>..\..\Releases\</ReleaseDir>
       <!-- extra optional params for squirrel. can be empty -->
-      <SquirrelParams>--no-msi</SquirrelParams>
+      <SquirrelParams>--no-msi --framework-version=net472  --no-delta</SquirrelParams>
     </PropertyGroup>
     <Error Condition="!Exists(%(NuGetCommandLine.FullPath))" Text="This project uses the `NuGet.CommandLine` package, but it is not installed." />
     <Error Condition="!Exists(%(Squirrel.FullPath))" Text="This project uses the `Squirrel.Windows package`, but it is not installed." />
