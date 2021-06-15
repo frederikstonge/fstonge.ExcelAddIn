@@ -24,6 +24,7 @@ namespace Sobeys.ExcelAddIn.Updater
                     {
                         mgr.CreateUninstallerRegistryEntry();
                         CreateRegistryEntries(v);
+                        SetVstoDebugEnvironmentVariables();
                     },
                     onAppUpdate: v =>
                     {
@@ -36,6 +37,7 @@ namespace Sobeys.ExcelAddIn.Updater
                     onAppUninstall: v =>
                     {
                         StopExcel();
+                        RemoveVstoDebugEnvironmentVariables();
                         RemoveRegistryEntries();
                         mgr.RemoveUninstallerRegistryEntry();
                     },
@@ -81,6 +83,18 @@ namespace Sobeys.ExcelAddIn.Updater
         private static void RemoveRegistryEntries()
         {
             Registry.CurrentUser.DeleteSubKeyTree(RegistrySubKey, false);
+        }
+
+        private static void SetVstoDebugEnvironmentVariables()
+        {
+            Environment.SetEnvironmentVariable("VSTO_LOGALERTS", "1", EnvironmentVariableTarget.User);
+            Environment.SetEnvironmentVariable("VSTO_SUPPRESSDISPLAYALERTS", "0", EnvironmentVariableTarget.User);
+        }
+
+        private static void RemoveVstoDebugEnvironmentVariables()
+        {
+            Environment.SetEnvironmentVariable("VSTO_LOGALERTS", null, EnvironmentVariableTarget.User);
+            Environment.SetEnvironmentVariable("VSTO_SUPPRESSDISPLAYALERTS", null, EnvironmentVariableTarget.User);
         }
     }
 }
