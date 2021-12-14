@@ -51,6 +51,7 @@ namespace Sobeys.ExcelAddIn.Controls
             SuperCopyDelimiter.Text = ";";
             SuperCopyMode.Text = Models.SuperCopyMode.Column.ToString("F");
             SuperCopySkipCells.Value = 0;
+            MergeSkipCells.Value = 0;
         }
 
         private void SkipCells_ValueChanged(object sender, EventArgs e)
@@ -83,6 +84,16 @@ namespace Sobeys.ExcelAddIn.Controls
             Properties.Settings.Default.Save();
         }
 
+        private void MergeSkipCells_ValueChanged(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.MergeSkipCells != MergeSkipCells.Value)
+            {
+                Properties.Settings.Default.MergeSkipCells = Convert.ToInt32(MergeSkipCells.Value);
+            }
+
+            Properties.Settings.Default.Save();
+        }
+
         private void Default_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             var value = Properties.Settings.Default[e.PropertyName];
@@ -110,16 +121,6 @@ namespace Sobeys.ExcelAddIn.Controls
                     numericUpDown.Value = Convert.ToInt32(value);
                 }
             }
-        }
-
-        private void MergeSkipCells_ValueChanged(object sender, EventArgs e)
-        {
-            if (Properties.Settings.Default.MergeSkipCells != MergeSkipCells.Value)
-            {
-                Properties.Settings.Default.MergeSkipCells = Convert.ToInt32(MergeSkipCells.Value);
-            }
-
-            Properties.Settings.Default.Save();
         }
     }
 }
