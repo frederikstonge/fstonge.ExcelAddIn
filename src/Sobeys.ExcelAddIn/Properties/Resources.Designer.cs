@@ -106,6 +106,15 @@ namespace Sobeys.ExcelAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Merge.
+        /// </summary>
+        internal static string Ribbon_Merge {
+            get {
+                return ResourceManager.GetString("Ribbon_Merge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Quick Action.
         /// </summary>
         internal static string Ribbon_QuickActionGroup {

@@ -132,6 +132,9 @@
   <data name="Ribbon_AboutGroup" xml:space="preserve">
     <value>About</value>
   </data>
+  <data name="Ribbon_Merge" xml:space="preserve">
+    <value>Merge</value>
+  </data>
   <data name="Ribbon_QuickActionGroup" xml:space="preserve">
     <value>Quick Action</value>
   </data>

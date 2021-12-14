@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Windows.Forms;
 using Sobeys.ExcelAddIn.Controls;
 using Sobeys.ExcelAddIn.Models;
 using Excel = Microsoft.Office.Interop.Excel;
@@ -40,6 +41,10 @@ namespace Sobeys.ExcelAddIn.Services
             {
                 case RibbonButtons.SuperCopy:
                     SuperCopy(GetUsedSelectionRange());
+                    break;
+                case RibbonButtons.Merge:
+                    var files = OpenMergeFiles();
+                    Merge(files);
                     break;
             }
         }
@@ -128,6 +133,63 @@ namespace Sobeys.ExcelAddIn.Services
             catch
             {
                 // ignored
+            }
+        }
+
+        private List<string> OpenMergeFiles()
+        {
+            using var openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Excel Files (*.xls;*.xlsx;*.xlsm)|*.xls;*.xlsx;*.xlsm";
+            openFileDialog.Multiselect = true;
+            openFileDialog.RestoreDirectory = true;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                return openFileDialog.FileNames.ToList();
+            }
+
+            return new List<string>();
+        }
+
+        private void Merge(List<string> filePaths)
+        {
+            if (!filePaths.Any())
+            { 
+                return;
+            }
+
+            var oXL = new Excel.Application();
+            oXL.Visible = false;
+
+            try
+            {
+                foreach (var file in filePaths)
+                {
+                    Excel.Workbook workbook = oXL.Workbooks.Open(file, ReadOnly: true);
+                    foreach (Excel.Worksheet worksheet in workbook.Worksheets)
+                    {
+                        Excel.Worksheet destinationWorksheet = _workbook.Worksheets[worksheet.Name];
+                        if (destinationWorksheet != null)
+                        {
+                            Excel.Range usedRange = worksheet.UsedRange;
+                            var skip = Properties.Settings.Default.MergeSkipCells;
+                            usedRange = usedRange.Offset[skip].Resize[usedRange.Rows.Count - skip];
+                            usedRange.Copy();
+                            Excel.Range last = destinationWorksheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+                            Excel.Range destinationUsedRange = destinationWorksheet.Cells[last.Row + 1, 1];
+                            destinationUsedRange.Select();
+                            destinationWorksheet.Paste();
+                        }
+                    }
+
+                    workbook.Close(false);
+                }
+            }
+            catch
+            {
+            }
+            finally
+            {
+                oXL.Quit();
             }
         }
 

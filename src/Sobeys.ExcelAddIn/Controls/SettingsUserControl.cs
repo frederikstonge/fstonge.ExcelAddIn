@@ -13,7 +13,6 @@ namespace Sobeys.ExcelAddIn.Controls
             InitializeComponent();
 
             SuperCopyGroupBox.Text = Properties.Resources.Settings_SuperCopyLabel;
-
             DelimiterLabel.Text = Properties.Resources.Settings_DelimiterLabel;
             SuperCopyDelimiter.Text = Properties.Settings.Default.SuperCopyDelimiter;
 
@@ -34,11 +33,15 @@ namespace Sobeys.ExcelAddIn.Controls
             SkipCellsLabel.Text = Properties.Resources.Settings_SkipCellsLabel;
             SuperCopySkipCells.Value = Properties.Settings.Default.SuperCopySkipCells;
 
+            MergeSkipCellsLabel.Text = Properties.Resources.Settings_SkipCellsLabel;
+            MergeSkipCells.Value = Properties.Settings.Default.MergeSkipCells;
+
             LoadDefault.Text = Properties.Resources.Settings_LoadDefaultLabel;
 
             SuperCopyDelimiter.TextChanged += Delimiter_TextChanged;
             SuperCopyMode.SelectedValueChanged += Mode_SelectedValueChanged;
             SuperCopySkipCells.ValueChanged += SkipCells_ValueChanged;
+            MergeSkipCells.ValueChanged += MergeSkipCells_ValueChanged;
             Properties.Settings.Default.PropertyChanged += Default_PropertyChanged;
             LoadDefault.Click += LoadDefault_Click;
         }
@@ -107,6 +110,16 @@ namespace Sobeys.ExcelAddIn.Controls
                     numericUpDown.Value = Convert.ToInt32(value);
                 }
             }
+        }
+
+        private void MergeSkipCells_ValueChanged(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.MergeSkipCells != MergeSkipCells.Value)
+            {
+                Properties.Settings.Default.MergeSkipCells = Convert.ToInt32(MergeSkipCells.Value);
+            }
+
+            Properties.Settings.Default.Save();
         }
     }
 }
