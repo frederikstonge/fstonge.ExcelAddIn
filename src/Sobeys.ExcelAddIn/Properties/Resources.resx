@@ -159,6 +159,9 @@
   <data name="Settings_LoadDefaultLabel" xml:space="preserve">
     <value>Load Default</value>
   </data>
+  <data name="Settings_MergeLabel" xml:space="preserve">
+    <value>Merge</value>
+  </data>
   <data name="Settings_ModeLabel" xml:space="preserve">
     <value>Mode:</value>
   </data>

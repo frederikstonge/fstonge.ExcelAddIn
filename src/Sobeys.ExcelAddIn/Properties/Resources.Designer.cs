@@ -187,6 +187,15 @@ namespace Sobeys.ExcelAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Merge.
+        /// </summary>
+        internal static string Settings_MergeLabel {
+            get {
+                return ResourceManager.GetString("Settings_MergeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mode:.
         /// </summary>
         internal static string Settings_ModeLabel {

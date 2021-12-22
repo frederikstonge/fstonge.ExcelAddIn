@@ -13,6 +13,7 @@ namespace Sobeys.ExcelAddIn.Controls
             InitializeComponent();
 
             SuperCopyGroupBox.Text = Properties.Resources.Settings_SuperCopyLabel;
+            MergeGroupBox.Text = Properties.Resources.Settings_MergeLabel;
             DelimiterLabel.Text = Properties.Resources.Settings_DelimiterLabel;
             SuperCopyDelimiter.Text = Properties.Settings.Default.SuperCopyDelimiter;
 
