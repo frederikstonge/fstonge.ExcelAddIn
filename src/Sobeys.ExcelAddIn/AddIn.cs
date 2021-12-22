@@ -21,7 +21,8 @@ namespace Sobeys.ExcelAddIn
         private void AddIn_Startup(object sender, EventArgs e)
         {
             SetupLanguage();
-            ValidateNewerVersion();
+
+            // ValidateNewerVersion();
             _bootstrapper = new Bootstrapper(_ribbon);
         }
 
