@@ -181,6 +181,7 @@ namespace Sobeys.ExcelAddIn.Services
                         }
                     }
 
+                    oXL.CutCopyMode = 0;
                     workbook.Close(false);
                 }
             }
