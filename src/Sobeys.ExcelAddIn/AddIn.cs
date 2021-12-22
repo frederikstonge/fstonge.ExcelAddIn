@@ -40,8 +40,12 @@ namespace Sobeys.ExcelAddIn
 
         private void ValidateNewerVersion()
         {
-#if !DEBUG
-            if (Application.Visible)
+            var shouldUpdate = Application.Visible;
+#if DEBUG
+            shouldUpdate = false;
+#endif
+
+            if (shouldUpdate)
             {
                 try
                 {
@@ -61,17 +65,18 @@ namespace Sobeys.ExcelAddIn
                             UseShellExecute = false,
                             CreateNoWindow = true,
                             WindowStyle = ProcessWindowStyle.Hidden,
-                            FileName = path
+                            FileName = path,
+                            RedirectStandardError = false,
+                            RedirectStandardOutput = false
                         }
                     };
                     process.Start();
                 }
-                catch
+                catch (Exception)
                 {
                     // ignored
                 }
             }
-#endif
         }
 
         private void InternalStartup()
