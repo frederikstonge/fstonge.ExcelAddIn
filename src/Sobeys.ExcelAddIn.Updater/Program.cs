@@ -22,6 +22,7 @@ namespace Sobeys.ExcelAddIn.Updater
                 SquirrelAwareApp.HandleEvents(
                     onInitialInstall: v =>
                     {
+                        StopExcel();
                         mgr.CreateUninstallerRegistryEntry();
                         CreateRegistryEntries(v);
                         SetVstoDebugEnvironmentVariables();
