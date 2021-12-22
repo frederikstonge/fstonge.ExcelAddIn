@@ -58,20 +58,7 @@ namespace Sobeys.ExcelAddIn
                         $"app-{version.ToString(3)}",
                         "Sobeys.ExcelAddIn.Updater.exe");
 
-                    var process = new Process
-                    {
-                        StartInfo =
-                        {
-                            UseShellExecute = true,
-                            CreateNoWindow = true,
-                            WindowStyle = ProcessWindowStyle.Hidden,
-                            FileName = path,
-                            RedirectStandardError = false,
-                            RedirectStandardOutput = false,
-                            WorkingDirectory = installationPath,
-                        }
-                    };
-                    process.Start();
+                    Process.Start(path);
                 }
                 catch (Exception)
                 {
