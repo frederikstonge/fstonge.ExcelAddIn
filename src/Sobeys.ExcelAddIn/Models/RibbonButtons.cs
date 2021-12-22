@@ -8,6 +8,8 @@
 
         public const string Settings = "Settings";
 
+        public const string Update = "Update";
+
         public const string About = "About";
     }
 }

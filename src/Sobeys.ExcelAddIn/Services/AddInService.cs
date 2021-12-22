@@ -1,5 +1,9 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
+using System.Diagnostics;
+using System.IO;
 using Sobeys.ExcelAddIn.Models;
+using Sobeys.ExcelAddIn.Updater;
 using Office = Microsoft.Office.Core;
 
 namespace Sobeys.ExcelAddIn.Services
@@ -17,8 +21,11 @@ namespace Sobeys.ExcelAddIn.Services
         {
             switch (control.Id)
             {
+                case RibbonButtons.Update:
+                    CheckForUpdate();
+                    break;
                 case RibbonButtons.About:
-                    System.Diagnostics.Process.Start("https://github.com/frederikstonge/sobeys-excel-addin");
+                    Process.Start("https://github.com/frederikstonge/sobeys-excel-addin");
                     break;
             }
         }
@@ -28,8 +35,34 @@ namespace Sobeys.ExcelAddIn.Services
             return control.Id switch
             {
                 RibbonButtons.About => true,
+                RibbonButtons.Update => true,
                 _ => false
             };
+        }
+
+        private void CheckForUpdate()
+        {
+            try
+            {
+                var installationPath = PathHelper.GetInstallationPath();
+                var version = typeof(AddIn).Assembly.GetName().Version;
+
+                var folderPath = Path.Combine(
+                    installationPath,
+                    $"app-{version.ToString(3)}");
+
+                var startInfo = new ProcessStartInfo();
+                startInfo.UseShellExecute = true;
+                startInfo.CreateNoWindow = true;
+                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                startInfo.WorkingDirectory = folderPath;
+                startInfo.FileName = "Sobeys.ExcelAddIn.Updater.exe";
+                Process proc = Process.Start(startInfo);
+            }
+            catch
+            {
+                // ignored
+            }
         }
     }
 }

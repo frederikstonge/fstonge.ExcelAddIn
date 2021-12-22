@@ -147,6 +147,9 @@
   <data name="Ribbon_SuperCopy" xml:space="preserve">
     <value>Super Copy</value>
   </data>
+  <data name="Ribbon_Update" xml:space="preserve">
+    <value>Update</value>
+  </data>
   <data name="Settings_DelimiterLabel" xml:space="preserve">
     <value>Delimiter:</value>
   </data>

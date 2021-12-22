@@ -9,6 +9,7 @@
         </group>
 		  <group id="AboutGroup" getLabel="GetLabel">
 			  <toggleButton size="large" id="Settings" getLabel="GetLabel" getScreentip="GetLabel" getPressed="GetWorkbookPressed" getEnabled="GetWorkbookEnabled" onAction="OnWorkbookPressedAction" imageMso="ComAddInsDialog" />
+			  <button size="large" id="Update" getLabel="GetLabel" getScreentip="GetLabel" onAction="OnAction" getEnabled="GetEnabled" imageMso="Refresh" />
 			  <button size="large" id="About" getLabel="GetLabel" getScreentip="GetLabel" onAction="OnAction" getEnabled="GetEnabled" imageMso="About" />
 		  </group>
       </tab>
