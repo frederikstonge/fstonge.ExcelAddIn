@@ -62,12 +62,13 @@ namespace Sobeys.ExcelAddIn
                     {
                         StartInfo =
                         {
-                            UseShellExecute = false,
+                            UseShellExecute = true,
                             CreateNoWindow = true,
                             WindowStyle = ProcessWindowStyle.Hidden,
                             FileName = path,
                             RedirectStandardError = false,
-                            RedirectStandardOutput = false
+                            RedirectStandardOutput = false,
+                            WorkingDirectory = installationPath,
                         }
                     };
                     process.Start();
