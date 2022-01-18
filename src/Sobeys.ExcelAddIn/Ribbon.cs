@@ -13,7 +13,7 @@ namespace Sobeys.ExcelAddIn
         private Office.IRibbonUI _ribbon;
 
         [Import]
-        public Bootstrapper Bootstrapper { get; set; }
+        public IBootstrapper Bootstrapper { get; set; }
 
         public void Invalidate()
         {

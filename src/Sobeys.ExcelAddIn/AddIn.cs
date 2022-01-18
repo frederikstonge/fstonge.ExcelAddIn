@@ -1,21 +1,19 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Globalization;
-using System.IO;
 using Microsoft.Office.Core;
-using Sobeys.ExcelAddIn.Updater;
 
 namespace Sobeys.ExcelAddIn
 {
     public partial class AddIn
     {
-        private Ribbon _ribbon;
-        private Bootstrapper _bootstrapper;
+        private IRibbon _ribbon;
+        private IBootstrapper _bootstrapper;
 
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject()
         {
-            _ribbon = new Ribbon();
-            return _ribbon;
+            var ribbon = new Ribbon();
+            _ribbon = ribbon;
+            return ribbon;
         }
 
         private void AddIn_Startup(object sender, EventArgs e)
@@ -26,7 +24,10 @@ namespace Sobeys.ExcelAddIn
 
         private void AddIn_Shutdown(object sender, EventArgs e)
         {
-            _bootstrapper.Dispose();
+            if (_bootstrapper is IDisposable disposable)
+            {
+                disposable.Dispose();
+            }
         }
 
         private void SetupLanguage()

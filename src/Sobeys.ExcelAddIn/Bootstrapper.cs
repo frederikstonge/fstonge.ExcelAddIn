@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
-using Microsoft.Office.Core;
 using Sobeys.ExcelAddIn.Models;
 using Sobeys.ExcelAddIn.Services;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Sobeys.ExcelAddIn
 {
-    public class Bootstrapper : IDisposable
+    public class Bootstrapper : IBootstrapper, IDisposable
     {
         private readonly IRibbon _ribbon;
         private readonly CompositionContainer _container;
@@ -19,14 +18,14 @@ namespace Sobeys.ExcelAddIn
         {
             _ribbon = ribbon;
             var catalog = new AggregateCatalog();
-            catalog.Catalogs.Add(new AssemblyCatalog(typeof(Bootstrapper).Assembly));
+            catalog.Catalogs.Add(new AssemblyCatalog(typeof(AddIn).Assembly));
             _container = new CompositionContainer(catalog);
             _workbookContainers = new Dictionary<string, WorkbookContainer>();
 
             var batch = new CompositionBatch();
             batch.AddExportedValue(_ribbon);
             batch.AddExportedValue(Globals.AddIn);
-            batch.AddExportedValue(this);
+            batch.AddExportedValue<IBootstrapper>(this);
             _container.Compose(batch);
             _container.ComposeParts(_ribbon);
 
@@ -91,7 +90,7 @@ namespace Sobeys.ExcelAddIn
             var batch = new CompositionBatch();
             batch.AddExportedValue(_container.GetExportedValue<IRibbon>());
             batch.AddExportedValue(_container.GetExportedValue<AddIn>());
-            batch.AddExportedValue(_container.GetExportedValue<Bootstrapper>());
+            batch.AddExportedValue(_container.GetExportedValue<IBootstrapper>());
             batch.AddExportedValue(_container.GetExportedValue<IAddInService>());
             batch.AddExportedValue(workbook);
             container.Compose(batch);

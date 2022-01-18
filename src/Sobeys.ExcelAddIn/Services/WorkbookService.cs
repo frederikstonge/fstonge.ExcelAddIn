@@ -157,8 +157,10 @@ namespace Sobeys.ExcelAddIn.Services
                 return;
             }
 
-            var oXL = new Excel.Application();
-            oXL.Visible = false;
+            var oXL = new Excel.Application
+            {
+                Visible = false
+            };
 
             try
             {
