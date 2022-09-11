@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fstonge.ExcelAddIn", "src\fstonge.ExcelAddIn\fstonge.ExcelAddIn.csproj", "{6144141F-2DA2-4DE7-AA3C-11A4CD6D9EE9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E88FECA7-AEF0-4510-B81F-9B538D46E203}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		GlobalAssemblyInfo.cs = GlobalAssemblyInfo.cs
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fstonge.ExcelAddIn.Updater", "src\fstonge.ExcelAddIn.Updater\fstonge.ExcelAddIn.Updater.csproj", "{29825CB4-8564-4069-8DF9-8E2924AF2713}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6144141F-2DA2-4DE7-AA3C-11A4CD6D9EE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6144141F-2DA2-4DE7-AA3C-11A4CD6D9EE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6144141F-2DA2-4DE7-AA3C-11A4CD6D9EE9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6144141F-2DA2-4DE7-AA3C-11A4CD6D9EE9}.Debug|x86.Build.0 = Debug|Any CPU
+		{6144141F-2DA2-4DE7-AA3C-11A4CD6D9EE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6144141F-2DA2-4DE7-AA3C-11A4CD6D9EE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6144141F-2DA2-4DE7-AA3C-11A4CD6D9EE9}.Release|x86.ActiveCfg = Release|Any CPU
+		{6144141F-2DA2-4DE7-AA3C-11A4CD6D9EE9}.Release|x86.Build.0 = Release|Any CPU
+		{29825CB4-8564-4069-8DF9-8E2924AF2713}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29825CB4-8564-4069-8DF9-8E2924AF2713}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29825CB4-8564-4069-8DF9-8E2924AF2713}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{29825CB4-8564-4069-8DF9-8E2924AF2713}.Debug|x86.Build.0 = Debug|Any CPU
+		{29825CB4-8564-4069-8DF9-8E2924AF2713}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29825CB4-8564-4069-8DF9-8E2924AF2713}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29825CB4-8564-4069-8DF9-8E2924AF2713}.Release|x86.ActiveCfg = Release|Any CPU
+		{29825CB4-8564-4069-8DF9-8E2924AF2713}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {92C8F25F-F2E2-46B4-8AE0-1FE941C2F49C}
+	EndGlobalSection
+EndGlobal
