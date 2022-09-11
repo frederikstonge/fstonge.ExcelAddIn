@@ -1,5 +1,5 @@
 # Excel Power Tools Add-in
-VSTO Excel Addin I made for my brother working at sobeys
+VSTO Excel Addin I made for my brother
 
 ![image](https://user-images.githubusercontent.com/5427239/147146795-42de1502-fd14-41c3-b22a-918f4d23a71e.png)
 
