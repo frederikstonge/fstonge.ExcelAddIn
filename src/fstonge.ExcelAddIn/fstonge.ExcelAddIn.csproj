@@ -233,6 +233,7 @@
     <Compile Include="Controls\SettingsUserControl.Designer.cs">
       <DependentUpon>SettingsUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IBootstrapper.cs" />
     <Compile Include="IRibbon.cs" />
     <Compile Include="Models\RibbonButtons.cs" />

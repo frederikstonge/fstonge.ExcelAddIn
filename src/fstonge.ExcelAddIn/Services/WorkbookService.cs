@@ -159,7 +159,8 @@ namespace fstonge.ExcelAddIn.Services
 
             var oXL = new Excel.Application
             {
-                Visible = false
+                Visible = false,
+                DisplayAlerts = false
             };
 
             try
