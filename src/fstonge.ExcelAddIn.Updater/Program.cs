@@ -10,8 +10,8 @@ namespace fstonge.ExcelAddIn.Updater
 {
     public class Program
     {
-        private const string GithubUsername = "frederikstonge";
-        private const string GithubProject = "fstonge-excel-addin";
+        public const string GithubUsername = "frederikstonge";
+        public const string GithubProject = "fstonge.ExcelAddIn";
         private const string RegistrySubKey = @"Software\Microsoft\Office\Excel\AddIns\fstonge.ExcelAddIn";
 
         public static async Task Main()

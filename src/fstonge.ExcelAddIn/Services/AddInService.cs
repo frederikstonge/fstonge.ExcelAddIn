@@ -25,7 +25,7 @@ namespace fstonge.ExcelAddIn.Services
                     CheckForUpdate();
                     break;
                 case RibbonButtons.About:
-                    Process.Start("https://github.com/frederikstonge/fstonge-excel-addin");
+                    Process.Start($"https://github.com/{Program.GithubUsername}/{Program.GithubProject}");
                     break;
             }
         }
