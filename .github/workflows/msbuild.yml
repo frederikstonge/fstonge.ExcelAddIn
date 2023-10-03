@@ -41,7 +41,7 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}
       # Add additional options to the MSBuild command line here (like platform or verbosity level).
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
-      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Version=${{env.APP_VERSION}} ${{env.SOLUTION_FILE_PATH}}
+      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:AssemblyVersion=${{env.APP_VERSION}} ${{env.SOLUTION_FILE_PATH}}
 
     - name: Create release
       uses: ncipollo/release-action@v1.13.0
