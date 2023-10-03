@@ -47,7 +47,7 @@ jobs:
       run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Version=${{env.APP_VERSION}} ${{env.SOLUTION_FILE_PATH}}
 
     - name: Create release
-      uses: ncipollo/release-action@v1.12.0
+      uses: ncipollo/release-action@v1.13.0
       with:
         artifacts: Releases/*
         name: "Version ${{env.APP_VERSION}}"
