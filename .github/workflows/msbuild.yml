@@ -49,6 +49,6 @@ jobs:
     - name: Create release
       uses: ncipollo/release-action@v1.12.0
       with:
-        artifacts: src/fstonge.ExcelAddIn/Releases/*
+        artifacts: Releases/*
         name: "Version ${{env.APP_VERSION}}"
         tag: "$${{env.APP_VERSION}}"
